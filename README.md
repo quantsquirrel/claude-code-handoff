@@ -6,48 +6,39 @@
 
 # 🪄 Handoff
 
-**[English](#standalone-usage-no-dependencies)** | **[한국어](#한국어-korean)**
+**English** | **[한국어](README-ko.md)**
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-success?style=flat-square)](https://github.com/anthropics/claude-code)
 [![Version](https://img.shields.io/badge/version-1.2.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-code-handoff)
 
+**Master context continuity across sessions.**
+
 </div>
 
 ---
 
-## Standalone Usage (No Dependencies!)
+## Quick Start
 
-**Handoff works without any framework or plugin system.** Just tell Claude:
+```bash
+# 1. Install
+/plugin install quantsquirrel/claude-code-handoff
 
+# 2. Use
+/handoff
 ```
-Before ending this session, create a handoff document
-```
 
-Claude will generate a complete handoff document with:
-- Session summary and progress
-- Key decisions and rationale
-- Failed approaches (don't repeat!)
-- Next steps for the next session
-
-**That's it.** No installation, no configuration, no dependencies.
-
-> 💡 **Want more features?** Install as a skill for clipboard auto-copy, quality scoring, and auto-handoff hooks.
-
----
-
-**Master context continuity across sessions.** Seamlessly transfer context, decisions, and progress between Claude Code sessions with automatic clipboard integration and quality validation.
+**Done.** Your context is preserved for the next session.
 
 ---
 
 ## Table of Contents
 
-- [Standalone Usage](#standalone-usage-no-dependencies)
+- [Quick Start](#quick-start)
 - [What is Handoff?](#what-is-handoff)
 - [Workflow](#workflow)
 - [Features](#features)
 - [Project Structure](#project-structure)
-- [Quick Start](#quick-start)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Output Format](#output-format)
@@ -58,7 +49,6 @@ Claude will generate a complete handoff document with:
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 - [License](#license)
-- [한국어 (Korean)](#한국어-korean)
 
 ---
 
@@ -142,67 +132,6 @@ Quality validation ensures your handoff is complete:
     └── scripts/
         └── validate.sh       # Validation utilities
 ```
-
----
-
-## Quick Start
-
-### Installation
-
-**Recommended: Plugin Marketplace**
-```bash
-/plugin marketplace add quantsquirrel/claude-code-handoff
-```
-
-✅ Easiest • ✅ Auto-validated • ✅ Official source
-
-**Alternative: Direct Install**
-```bash
-/plugin install quantsquirrel/claude-code-handoff
-```
-
-**Manual Install**
-```bash
-git clone https://github.com/quantsquirrel/claude-code-handoff.git ~/.claude/skills/handoff
-cd ~/.claude/skills/handoff
-npm install
-```
-
-### Basic Usage
-
-```bash
-# Create handoff with topic
-/handoff "authentication refactoring"
-
-# Auto-detect topic from git branch
-/handoff
-
-# Interactive mode
-/handoff --interactive
-```
-
-### What You Get
-
-After running `/handoff`:
-
-✅ **Document Created** - `.claude/handoffs/{timestamp}-{topic}.md`
-📋 **Clipboard Ready** - Compressed prompt copied and ready to paste
-⭐ **Quality Score** - 0-100 validation with breakdown
-🔐 **Security Check** - Warnings if secrets detected
-
-### How to Resume (Important!)
-
-After creating a handoff, follow these steps in your **new session**:
-
-```bash
-# Step 1: Clear the current session
-/clear
-
-# Step 2: Paste the handoff prompt (Cmd+V or Ctrl+V)
-# The compressed context is already in your clipboard!
-```
-
-> ⚠️ **Why `/clear` first?** Without clearing, the pasted context may get cut off or mixed with existing conversation. Always start fresh!
 
 ---
 
@@ -822,190 +751,6 @@ See [LICENSE](LICENSE) file for details.
 | ✓ Modify the source code | ✓ Include license text with distributions |
 | ✓ Distribute copies | ✓ State significant changes made |
 | ✓ Include in proprietary software | |
-
----
-
-## 한국어 (Korean)
-
-> 세션 간 컨텍스트를 보존하는 Claude Code 플러그인
-
-### 소개
-
-**Handoff**는 Claude Code에서 세션 간 컨텍스트를 효율적으로 전달하는 독립적이고 standalone 플러그인입니다. 프로젝트의 상태, 결정사항, 진행상황을 자동으로 기록하고, 클립보드에 압축된 프롬프트를 복사합니다.
-
-**별도의 프레임워크 의존성 없이 독립적으로 작동합니다.**
-
-### 주요 특징
-
-| 기능 | 설명 |
-|------|------|
-| 🎯 **포괄적 컨텍스트** | 프로젝트 상태, 결정사항, 진행상황 자동 기록 |
-| 📋 **클립보드 자동 복사** | 한 줄의 명령으로 압축된 프롬프트가 클립보드에 복사 |
-| 🔗 **Git 통합** | 커밋 히스토리, 브랜치, 스테이지된 변경사항 포함 |
-| 🚫 **실패한 접근법** | 작동하지 않은 것을 문서화하여 반복 방지 |
-| ⛓️ **Handoff 체인** | 이전/다음 세션을 연결하여 연속성 유지 |
-| 🔐 **시크릿 검출** | API 키, 자격증명 등 잠재적 보안 위험 경고 |
-| ⭐ **품질 점수** | Handoff 완성도를 0-100 점수로 검증 |
-| 🇰🇷 **한국어 지원** | 한국어 라벨과 컨텍스트를 포함한 클립보드 프롬프트 |
-| ✅ **TODO 통합** | .claude/tasks.json의 작업 자동 포함 |
-| 🔔 **자동 핸드오프 훅** | 컨텍스트 70% 도달 시 `/handoff` 권유 (선택) |
-
-### 자동 핸드오프 훅
-
-컨텍스트 사용량을 모니터링하고 70%에 도달하면 핸드오프 생성을 권유합니다.
-
-```bash
-# 설치
-cd ~/.claude/skills/handoff
-bash hooks/install.sh
-```
-
-| 사용량 | 동작 |
-|--------|------|
-| 70-79% | 📋 제안 표시 |
-| 80-89% | ⚠️ 경고 - 권장 |
-| 90%+ | 🚨 긴급 - 즉시 생성 |
-
-### 설치
-
-**추천 방법: 플러그인 마켓플레이스**
-```bash
-/plugin marketplace add quantsquirrel/claude-code-handoff
-```
-
-✅ 가장 쉬움 • ✅ 자동 검증 • ✅ 공식 소스
-
-**직접 설치**
-```bash
-/plugin install quantsquirrel/claude-code-handoff
-```
-
-**수동 설치**
-```bash
-git clone https://github.com/quantsquirrel/claude-code-handoff.git ~/.claude/skills/handoff
-cd ~/.claude/skills/handoff
-npm install
-```
-
-### 사용법
-
-```bash
-# 주제와 함께 handoff 생성
-/handoff "인증 리팩토링"
-
-# 상호 대화 모드
-/handoff --interactive
-
-# 한국어 출력
-/handoff "주제" --language ko
-```
-
-### 실행 결과
-
-`/handoff` 실행 후:
-
-✅ **문서 생성됨** - `.claude/handoffs/{timestamp}-{topic}.md`
-📋 **클립보드에 복사됨** - 압축된 프롬프트 붙여넣기 준비 완료
-📊 **품질 점수 표시** - 0-100 점수 및 상세 분석
-🔐 **보안 검사** - 시크릿 감지 시 경고 표시
-
-### 한국어 클립보드 프롬프트 예시
-
-> **[인수인계] 사용자 인증 마이그레이션**
->
-> 브랜치: `feature/auth-migration`
-
-| 항목 | 내용 |
-|------|------|
-| **상태** | 65% 완료 |
-| **차단 요소** | Auth0 테넌트 구성 대기 중 |
-| **진행** | Auth0 제공자 완료, 테스트 오늘 시작 |
-
-**파일:**
-- `src/auth/auth0-provider.ts`
-- `src/config/environment.ts`
-
-**결정사항:**
-- Auth0 도입 (25일)
-- 배치 마이그레이션 (29일)
-- 이중 검증 (30일)
-
-**실패한 접근법:**
-- ~~DB 트랜잭션 락~~ → 배치 마이그레이션 사용
-
-**다음 단계:** 제공자 초기화 완료 → 스테이징 테스트 → 배포
-
-### 설정 파일
-
-`.claude/handoffs.config.json` 파일 생성:
-
-```json
-{
-  "language": "ko",
-  "outputDir": ".claude/handoffs",
-  "clipboardFormat": "compressed"
-}
-```
-
-### 문서 구조
-
-| 필수 섹션 | 설명 |
-|-----------|------|
-| **컨텍스트 요약** | 현재 목표, 프로젝트 상태 |
-| **기술 세부사항** | Git 상태, 활성 작업, 코드 변경 |
-| **핵심 결정사항** | 아키텍처 결정, API 설계 |
-| **다음 단계** | 즉시 조치사항, 단기/중기 계획 |
-
-| 고급 섹션 | 설명 |
-|-----------|------|
-| **실패한 접근법** | 작동하지 않은 것, 교훈 |
-| **Handoff 체인** | 이전/다음 세션 링크 |
-| **차단 요소** | 현재 차단 요소, 외부 의존성 |
-| **품질 메트릭** | 코드 커버리지, 성능 지표 |
-
-### 프로그래매틱 접근
-
-```javascript
-const { createHandoff } = require('@claude-code/handoff');
-
-const handoff = await createHandoff({
-  topic: '데이터베이스 마이그레이션',
-  language: 'ko'  // 한국어 출력
-});
-
-console.log(`생성됨: ${handoff.path}`);
-console.log(`품질 점수: ${handoff.qualityScore}/100`);
-```
-
-### 문제 해결
-
-**클립보드에 복사되지 않음**
-
-```bash
-# macOS 확인
-which pbcopy
-
-# Linux 확인
-which xclip
-
-# 설치 필요 시
-sudo apt-get install xclip
-```
-
-**품질 점수가 낮음**
-
-- ✓ Git 저장소 초기화: `git init`
-- ✓ 작업 설명 추가: `.claude/tasks.json`
-- ✓ 실패한 접근법 문서화
-- ✓ 이전 Handoff 링크: `/handoff "주제" --previous sess_id`
-
-### 피드백 및 기여
-
-한국어 관련 이슈나 기여를 환영합니다!
-
-[GitHub Issues에서 제출하기](https://github.com/quantsquirrel/claude-code-handoff/issues)
-
-<div align="right"><a href="#top">⬆️ Back to Top</a></div>
 
 ---
 

@@ -1,0 +1,257 @@
+<div id="top"></div>
+
+<div align="center">
+
+<img src="assets/handoff.jpeg" alt="Handoff - 세션 간 바톤을 전달하세요">
+
+# 🪄 Handoff
+
+**[English](README.md)** | **한국어**
+
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-success?style=flat-square)](https://github.com/anthropics/claude-code)
+[![Version](https://img.shields.io/badge/version-1.2.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-code-handoff)
+
+**세션 간 컨텍스트 연속성을 마스터하세요.**
+
+</div>
+
+---
+
+## 빠른 시작
+
+```bash
+# 1. 설치
+/plugin install quantsquirrel/claude-code-handoff
+
+# 2. 사용
+/handoff
+```
+
+**끝.** 다음 세션을 위해 컨텍스트가 보존됩니다.
+
+---
+
+## 목차
+
+- [빠른 시작](#빠른-시작)
+- [Handoff란?](#handoff란)
+- [주요 특징](#주요-특징)
+- [설치](#설치)
+- [사용법](#사용법)
+- [실행 결과](#실행-결과)
+- [자동 핸드오프 훅](#자동-핸드오프-훅)
+- [설정](#설정)
+- [문제 해결](#문제-해결)
+- [기여하기](#기여하기)
+
+---
+
+## Handoff란?
+
+| Handoff 없이 | Handoff 사용 시 |
+|--------------|-----------------|
+| ❌ 매 세션마다 컨텍스트 재설명 | ✅ 자동 컨텍스트 캡처 |
+| ❌ 실패한 접근법 반복 | ✅ 실패한 접근법 추적 |
+| ❌ 결정사항 및 진행상황 손실 | ✅ 결정사항 문서화 |
+| ❌ 수동 노트 작성 | ✅ 한 줄 명령으로 생성 |
+| ❌ 불완전한 인수인계 | ✅ 품질 점수 검증 |
+
+**한 번의 명령. 완전한 컨텍스트. 재설명 제로.**
+
+---
+
+## 주요 특징
+
+| 기능 | 설명 |
+|------|------|
+| 🎯 **포괄적 컨텍스트** | 프로젝트 상태, 결정사항, 진행상황 자동 기록 |
+| 📋 **클립보드 자동 복사** | 한 줄의 명령으로 압축된 프롬프트가 클립보드에 복사 |
+| 🔗 **Git 통합** | 커밋 히스토리, 브랜치, 스테이지된 변경사항 포함 |
+| 🚫 **실패한 접근법** | 작동하지 않은 것을 문서화하여 반복 방지 |
+| ⛓️ **Handoff 체인** | 이전/다음 세션을 연결하여 연속성 유지 |
+| 🔐 **시크릿 검출** | API 키, 자격증명 등 잠재적 보안 위험 경고 |
+| ⭐ **품질 점수** | Handoff 완성도를 0-100 점수로 검증 |
+| 🇰🇷 **한국어 지원** | 한국어 라벨과 컨텍스트를 포함한 클립보드 프롬프트 |
+| ✅ **TODO 통합** | .claude/tasks.json의 작업 자동 포함 |
+| 🔔 **자동 핸드오프 훅** | 컨텍스트 70% 도달 시 `/handoff` 권유 (선택) |
+
+---
+
+## 설치
+
+**추천 방법: 플러그인 마켓플레이스**
+```bash
+/plugin marketplace add quantsquirrel/claude-code-handoff
+```
+
+✅ 가장 쉬움 • ✅ 자동 검증 • ✅ 공식 소스
+
+**직접 설치**
+```bash
+/plugin install quantsquirrel/claude-code-handoff
+```
+
+**수동 설치**
+```bash
+git clone https://github.com/quantsquirrel/claude-code-handoff.git ~/.claude/skills/handoff
+cd ~/.claude/skills/handoff
+npm install
+```
+
+---
+
+## 사용법
+
+```bash
+# 주제와 함께 handoff 생성
+/handoff "인증 리팩토링"
+
+# Git 브랜치에서 주제 자동 감지
+/handoff
+
+# 상호 대화 모드
+/handoff --interactive
+```
+
+---
+
+## 실행 결과
+
+`/handoff` 실행 후:
+
+✅ **문서 생성됨** - `.claude/handoffs/{timestamp}-{topic}.md`
+📋 **클립보드에 복사됨** - 압축된 프롬프트 붙여넣기 준비 완료
+📊 **품질 점수 표시** - 0-100 점수 및 상세 분석
+🔐 **보안 검사** - 시크릿 감지 시 경고 표시
+
+### 세션 재개 방법 (중요!)
+
+핸드오프 생성 후, **새 세션**에서 다음 단계를 따르세요:
+
+```bash
+# Step 1: 현재 세션 초기화
+/clear
+
+# Step 2: 핸드오프 프롬프트 붙여넣기 (Cmd+V 또는 Ctrl+V)
+# 압축된 컨텍스트가 이미 클립보드에 있습니다!
+```
+
+> ⚠️ **왜 `/clear`를 먼저?** 초기화 없이 붙여넣으면 컨텍스트가 잘리거나 기존 대화와 섞일 수 있습니다. 항상 새로 시작하세요!
+
+---
+
+## 자동 핸드오프 훅
+
+컨텍스트 사용량을 모니터링하고 70%에 도달하면 핸드오프 생성을 권유합니다.
+
+```bash
+# 설치
+cd ~/.claude/skills/handoff
+bash hooks/install.sh
+```
+
+| 사용량 | 동작 |
+|--------|------|
+| 70-79% | 📋 제안 표시 |
+| 80-89% | ⚠️ 경고 - 권장 |
+| 90%+ | 🚨 긴급 - 즉시 생성 |
+
+---
+
+## 설정
+
+`.claude/handoffs.config.json` 파일 생성:
+
+```json
+{
+  "language": "ko",
+  "outputDir": ".claude/handoffs",
+  "clipboardFormat": "compressed"
+}
+```
+
+### 설정 옵션
+
+| 옵션 | 타입 | 기본값 | 설명 |
+|------|------|--------|------|
+| `outputDir` | string | `.claude/handoffs` | 핸드오프 문서 저장 위치 |
+| `language` | string | `en` | `en` 또는 `ko` (한국어) |
+| `clipboardFormat` | string | `compressed` | `compressed` 또는 `full` |
+| `secretDetection` | boolean | `true` | API 키 및 자격증명 스캔 |
+| `qualityValidation` | boolean | `true` | 품질 점수 계산 및 표시 |
+
+---
+
+## 문제 해결
+
+### 클립보드에 복사되지 않음
+
+```bash
+# macOS 확인
+which pbcopy
+
+# Linux 확인
+which xclip
+
+# 설치 필요 시
+sudo apt-get install xclip
+```
+
+### 품질 점수가 낮음
+
+- ✓ Git 저장소 초기화: `git init`
+- ✓ 작업 설명 추가: `.claude/tasks.json`
+- ✓ 실패한 접근법 문서화
+- ✓ 이전 Handoff 링크: `/handoff "주제" --previous sess_id`
+
+---
+
+## 기여하기
+
+한국어 관련 이슈나 기여를 환영합니다!
+
+### 개발 설정
+
+```bash
+git clone https://github.com/quantsquirrel/claude-code-handoff.git
+cd handoff
+npm install
+npm run dev
+```
+
+### 이슈 제출
+
+[GitHub Issues에서 제출하기](https://github.com/quantsquirrel/claude-code-handoff/issues)
+
+---
+
+## 라이선스
+
+**MIT License**
+
+Copyright © 2026 Handoff Contributors
+
+자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
+
+---
+
+## 지원
+
+**리소스**
+- 문서: [docs](./docs) 디렉토리 확인
+- 예시: [examples](./examples) 디렉토리 참조
+
+**커뮤니티**
+- 이슈: [GitHub Issues](https://github.com/quantsquirrel/claude-code-handoff/issues)
+- 토론: [GitHub Discussions](https://github.com/quantsquirrel/claude-code-handoff/discussions)
+
+---
+
+**🏃 바톤을 전달할 준비가 되셨나요?** `/handoff`를 실행하고 모멘텀을 유지하세요!
+
+Made by [QuantSquirrel](https://github.com/quantsquirrel) | [이슈 제출](https://github.com/quantsquirrel/claude-code-handoff/issues)
+
+⭐ **GitHub에서 스타를 눌러주세요:** [claude-code-handoff](https://github.com/quantsquirrel/claude-code-handoff)
+
+<div align="right"><a href="#top">⬆️ 맨 위로</a></div>
