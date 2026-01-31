@@ -1,14 +1,40 @@
-# Handoff
+```
+    ┌────────────────────────────────────────────────────────────────┐
+    │                                                                │
+    │     🏃‍♂️ ═══════════════🪄════════════════════> 🏃‍♀️             │
+    │                                                                │
+    │                   H  A  N  D  O  F  F                          │
+    │                                                                │
+    │            Context Relay for Claude Code Sessions             │
+    │                                                                │
+    │    SESSION 1  ───🎯───►  HANDOFF  ───🎯───►  SESSION 2        │
+    │       ⚡              📋 Never Lose Progress 📋          ⚡     │
+    │                                                                │
+    └────────────────────────────────────────────────────────────────┘
+```
+
+<div align="center">
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Claude Code Compatible](https://img.shields.io/badge/Claude%20Code-compatible-success)](https://github.com/anthropics/claude-code)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue)](./package.json)
+[![🇰🇷 Korean Supported](https://img.shields.io/badge/🇰🇷-Korean_Supported-red)](README.md#한국어-korean)
+[![⚡ Zero Dependencies](https://img.shields.io/badge/⚡-Zero_Dependencies-yellow)](#)
+[![🔄 Session Continuity](https://img.shields.io/badge/🔄-Session_Continuity-green)](#)
 
-An independent, standalone Claude Code plugin for creating comprehensive session handoff documents. Seamlessly transfer context, decisions, and progress between Claude Code sessions with automatic clipboard integration and quality validation.
+</div>
 
-> **Master context continuity across sessions. Never lose momentum again.**
->
-> **Works independently - no framework dependencies required.**
+<div align="center">
+
+### 🏃 Pass the baton. Keep the momentum. Never explain your codebase twice.
+
+**Master context continuity across sessions.**
+Seamlessly transfer context, decisions, and progress between Claude Code sessions
+with automatic clipboard integration and quality validation.
+
+**Works independently - no framework dependencies required.**
+
+</div>
 
 ---
 
@@ -28,47 +54,259 @@ An independent, standalone Claude Code plugin for creating comprehensive session
 
 ---
 
+## What is Handoff?
+
+```
+    ╔════════════════════════════════════════════════════════════════╗
+    ║                                                                ║
+    ║              THE PROBLEM: Context Loss Between Sessions       ║
+    ║                                                                ║
+    ║   Session 1 ──────> ❌ Gap ❌ ──────> Session 2                ║
+    ║   [Working hard]   [Re-explain]    [Start from scratch]       ║
+    ║                                                                ║
+    ╠════════════════════════════════════════════════════════════════╣
+    ║                                                                ║
+    ║              THE SOLUTION: Handoff Plugin                     ║
+    ║                                                                ║
+    ║   Session 1 ──────> 📋 Handoff ──────> Session 2              ║
+    ║   [Working]      [Auto-captured]     [Continue seamlessly]    ║
+    ║                                                                ║
+    ║   ✅ Project state    ✅ Decisions made   ✅ What failed       ║
+    ║   ✅ Git changes      ✅ Next steps       ✅ Quality score     ║
+    ║                                                                ║
+    ╚════════════════════════════════════════════════════════════════╝
+```
+
+<div align="center">
+
+**One command. Complete context. Zero re-explaining.**
+
+</div>
+
+---
+
 ## Features
 
-### Core Capabilities
+```
+╔════════════════════════════════════════════════════════════════════════╗
+║                          CORE CAPABILITIES                             ║
+╚════════════════════════════════════════════════════════════════════════╝
+```
 
-- **🎯 Comprehensive Context Capture** - Automatically documents project state, decisions, progress, and blockers
-- **📋 Clipboard Auto-Copy** - One-line compressed prompt instantly copied to clipboard (pbcopy/xclip)
-- **🔗 Git Integration** - Captures commit history, current branch, staged changes, and file diffs
-- **✅ Todo Integration** - Automatically includes pending and in-progress tasks from `.claude/tasks.json`
-- **🇰🇷 Korean Language Support** - Unique clipboard prompt with Korean labels and context
-- **🚫 Failed Approaches Tracking** - Document what didn't work to avoid repeating mistakes
-- **⛓️ Handoff Chain** - Link previous and next sessions for narrative continuity
-- **🔐 Secret Detection** - Identifies and warns about potential secrets (API keys, credentials)
-- **⭐ Quality Score** - Validates handoff completeness with detailed scoring breakdown
-- **📊 Session Metadata** - Captures timestamps, branch info, and environment details
+<table>
+<tr>
+<td width="33%">
+
+```
+┌─────────────────────┐
+│ 🎯 COMPREHENSIVE    │
+│    CONTEXT          │
+├─────────────────────┤
+│ Auto-documents:     │
+│ • Project state     │
+│ • Decisions made    │
+│ • Progress          │
+│ • Blockers          │
+└─────────────────────┘
+```
+
+</td>
+<td width="33%">
+
+```
+┌─────────────────────┐
+│ 📋 CLIPBOARD        │
+│    AUTO-COPY        │
+├─────────────────────┤
+│ One command:        │
+│ ✓ Compressed        │
+│ ✓ Instant copy      │
+│ ✓ Ready to paste    │
+└─────────────────────┘
+```
+
+</td>
+<td width="33%">
+
+```
+┌─────────────────────┐
+│ 🔗 GIT              │
+│    INTEGRATION      │
+├─────────────────────┤
+│ Captures:           │
+│ • Commit history    │
+│ • Branch state      │
+│ • File diffs        │
+└─────────────────────┘
+```
+
+</td>
+</tr>
+<tr>
+<td width="33%">
+
+```
+┌─────────────────────┐
+│ 🚫 FAILED           │
+│    APPROACHES       │
+├─────────────────────┤
+│ Track what          │
+│ didn't work to      │
+│ avoid repeating     │
+│ mistakes            │
+└─────────────────────┘
+```
+
+</td>
+<td width="33%">
+
+```
+┌─────────────────────┐
+│ ⛓️  HANDOFF         │
+│    CHAIN            │
+├─────────────────────┤
+│ Link sessions       │
+│ for narrative       │
+│ continuity &        │
+│ history tracking    │
+└─────────────────────┘
+```
+
+</td>
+<td width="33%">
+
+```
+┌─────────────────────┐
+│ 🔐 SECRET           │
+│    DETECTION        │
+├─────────────────────┤
+│ Auto-detect and     │
+│ warn about:         │
+│ • API keys          │
+│ • Credentials       │
+└─────────────────────┘
+```
+
+</td>
+</tr>
+<tr>
+<td width="33%">
+
+```
+┌─────────────────────┐
+│ ⭐ QUALITY          │
+│    SCORE            │
+├─────────────────────┤
+│ Validates           │
+│ completeness with   │
+│ detailed scoring    │
+│ breakdown (0-100)   │
+└─────────────────────┘
+```
+
+</td>
+<td width="33%">
+
+```
+┌─────────────────────┐
+│ 🇰🇷 KOREAN          │
+│    SUPPORT          │
+├─────────────────────┤
+│ Unique clipboard    │
+│ prompt with Korean  │
+│ labels & context    │
+│ (독특한 한국어 지원)    │
+└─────────────────────┘
+```
+
+</td>
+<td width="33%">
+
+```
+┌─────────────────────┐
+│ ✅ TODO             │
+│    INTEGRATION      │
+├─────────────────────┤
+│ Auto-includes       │
+│ pending and         │
+│ in-progress tasks   │
+│ from .claude/       │
+└─────────────────────┘
+```
+
+</td>
+</tr>
+</table>
 
 ---
 
 ## Quick Start
 
+```
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                   THE HANDOFF WORKFLOW                    ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+         ┌─────────────┐         ┌──────────────┐         ┌─────────────┐
+         │  Session 1  │         │   /handoff   │         │  Session 2  │
+         │  [Working]  │────────►│  [Generate]  │────────►│ [Continue]  │
+         └─────────────┘         └──────────────┘         └─────────────┘
+              │                         │                       │
+              │                         ▼                       │
+              │                   📋 Clipboard                  │
+              │                   ✅ Document                   │
+              │                   ⭐ Score                      │
+              │                                                 │
+              └─────────────────────────────────────────────────┘
+                         [No Re-explaining Required]
+```
+
 ### Installation
 
-**Recommended: Via Plugin Marketplace**
+<table>
+<tr>
+<td width="33%">
 
+**🏆 RECOMMENDED**
 ```bash
-# Install from Claude Code plugin marketplace
-/plugin marketplace add quantsquirrel/claude-code-handoff
+# Plugin Marketplace
+/plugin marketplace add \
+  quantsquirrel/claude-code-handoff
 ```
+✅ Easiest
+✅ Auto-validated
+✅ Official source
 
-**Or: Direct Install**
+</td>
+<td width="33%">
 
+**⚡ DIRECT INSTALL**
 ```bash
-# Install directly from GitHub
-/plugin install quantsquirrel/claude-code-handoff
+# From GitHub
+/plugin install \
+  quantsquirrel/claude-code-handoff
 ```
+✅ Fast
+✅ Auto-setup
+✅ Simple
 
-**Or: Manual Installation**
+</td>
+<td width="33%">
 
+**🔧 MANUAL INSTALL**
 ```bash
-# Clone to Claude Code skills directory
-git clone https://github.com/quantsquirrel/claude-code-handoff.git ~/.claude/skills/handoff
+# Clone repository
+git clone https://github.com/\
+quantsquirrel/claude-code-handoff.git \
+~/.claude/skills/handoff
 ```
+✅ Full control
+✅ Local editing
+✅ Development
+
+</td>
+</tr>
+</table>
 
 ### Basic Usage
 
@@ -85,11 +323,25 @@ git clone https://github.com/quantsquirrel/claude-code-handoff.git ~/.claude/ski
 
 ### Immediate Result
 
-After running `/handoff`, you'll see:
-1. ✅ Handoff document created at `.claude/handoffs/{timestamp}-{topic}.md`
-2. 📋 Compressed prompt automatically copied to clipboard
-3. 📊 Quality score displayed (0-100)
-4. 🔐 Security warnings (if any secrets detected)
+```
+    ┌────────────────────────────────────────────────────┐
+    │  After running /handoff, you'll get:               │
+    ├────────────────────────────────────────────────────┤
+    │                                                    │
+    │  ✅  Document Created                              │
+    │      .claude/handoffs/{timestamp}-{topic}.md       │
+    │                                                    │
+    │  📋  Clipboard Populated                           │
+    │      Compressed prompt ready to paste              │
+    │                                                    │
+    │  ⭐  Quality Score                                 │
+    │      0-100 validation with breakdown               │
+    │                                                    │
+    │  🔐  Security Check                                │
+    │      Warnings if secrets detected                  │
+    │                                                    │
+    └────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -146,16 +398,31 @@ npm install
 
 ### Verification
 
+```
+    ┌────────────────────────────────────────────────────────┐
+    │  ✅ VERIFY INSTALLATION                                │
+    └────────────────────────────────────────────────────────┘
+```
+
 Verify installation by checking for the skill:
 ```bash
 /plugin list | grep handoff
 ```
 
-Expected output: `handoff (v1.0.0) - Session handoff and context transfer`
+**Expected output:**
+```
+✅ handoff (v1.0.0) - Session handoff and context transfer
+```
 
 ---
 
 ## Usage
+
+```
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                      USAGE GUIDE                          ║
+    ╚═══════════════════════════════════════════════════════════╝
+```
 
 ### Basic Syntax
 
@@ -168,6 +435,12 @@ Expected output: `handoff (v1.0.0) - Session handoff and context transfer`
 
 ### Examples
 
+```
+    ┌────────────────────────────────────────────────────────┐
+    │  💡 USAGE EXAMPLES                                     │
+    └────────────────────────────────────────────────────────┘
+```
+
 #### 1. Simple Handoff with Topic
 
 ```bash
@@ -176,14 +449,25 @@ Expected output: `handoff (v1.0.0) - Session handoff and context transfer`
 
 **Output:**
 ```
-✅ Handoff created: .claude/handoffs/2026-01-31-123456-auth-migration.md
-📋 Compressed prompt copied to clipboard (892 chars)
-⭐ Quality Score: 87/100
-  ├─ Context Coverage: 95%
-  ├─ Decision Documentation: 85%
-  ├─ Failed Approaches: 80%
-  ├─ Secret Detection: 100%
-  └─ Continuity Links: 75%
+    ╔════════════════════════════════════════════════════════════╗
+    ║              HANDOFF GENERATION COMPLETE                   ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    ✅  Document Created
+        .claude/handoffs/2026-01-31-123456-auth-migration.md
+
+    📋  Clipboard Ready (892 chars)
+        Compressed prompt copied and ready to paste
+
+    ⭐  Quality Score: 87/100
+        ████████████████████░░░░
+
+        Breakdown:
+        ├─ Context Coverage       ████████████████████  95%
+        ├─ Decision Documentation █████████████████     85%
+        ├─ Failed Approaches      ████████████████      80%
+        ├─ Secret Detection       ████████████████████  100%
+        └─ Continuity Links       ███████████████       75%
 ```
 
 #### 2. Interactive Mode
@@ -192,12 +476,25 @@ Expected output: `handoff (v1.0.0) - Session handoff and context transfer`
 /handoff --interactive
 ```
 
-Prompts you with questions:
+**Prompts you with questions:**
 ```
-? What's the main topic? > user authentication
-? Current blockers? > Database migration timing
-? Next priorities? > API integration testing
-? Previous handoff ID? > 2026-01-30-092345
+    ┌────────────────────────────────────────────────────────┐
+    │  💬 INTERACTIVE PROMPTS                                │
+    ├────────────────────────────────────────────────────────┤
+    │                                                        │
+    │  ? What's the main topic?                             │
+    │    > user authentication                              │
+    │                                                        │
+    │  ? Current blockers?                                  │
+    │    > Database migration timing                        │
+    │                                                        │
+    │  ? Next priorities?                                   │
+    │    > API integration testing                          │
+    │                                                        │
+    │  ? Previous handoff ID?                               │
+    │    > 2026-01-30-092345                                │
+    │                                                        │
+    └────────────────────────────────────────────────────────┘
 ```
 
 #### 3. Auto-Detect from Git Branch
@@ -207,7 +504,11 @@ Prompts you with questions:
 /handoff
 ```
 
-Auto-uses topic: `dark-mode-redesign`
+```
+    ┌────────────────────────────────────────────────────────┐
+    │  🔍 Auto-detected topic: dark-mode-redesign            │
+    └────────────────────────────────────────────────────────┘
+```
 
 #### 4. With Custom Config
 
@@ -215,17 +516,56 @@ Auto-uses topic: `dark-mode-redesign`
 /handoff "database optimization" --config my-config.json
 ```
 
-Loads custom settings from `my-config.json`.
+```
+    ┌────────────────────────────────────────────────────────┐
+    │  ⚙️  Loading custom settings from my-config.json       │
+    └────────────────────────────────────────────────────────┘
+```
 
 ---
 
 ## Output Format
 
+```
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                   HANDOFF DOCUMENT FORMAT                 ║
+    ╚═══════════════════════════════════════════════════════════╝
+```
+
 ### Handoff Document Structure
 
 Every handoff creates a markdown file with comprehensive sections:
 
-**File Location:** `.claude/handoffs/{date}-{time}-{topic}.md`
+```
+    📁 File Location: .claude/handoffs/{date}-{time}-{topic}.md
+```
+
+<table>
+<tr>
+<td width="50%">
+
+**📋 Document Sections**
+- Context Summary
+- Technical Details
+- Key Decisions Made
+- Failed Approaches
+- Handoff Chain
+- Blockers & Dependencies
+
+</td>
+<td width="50%">
+
+**🔍 Additional Content**
+- Environment & Setup
+- Quality Metrics
+- Security Considerations
+- Resources & References
+- Next Steps
+- Compressed Prompt
+
+</td>
+</tr>
+</table>
 
 ### Example Handoff Document
 
@@ -550,43 +890,93 @@ PREVIOUS SESSION: sess_2026_01_30_145632
 
 ### Compressed Clipboard Prompt
 
+```
+    ┌────────────────────────────────────────────────────────┐
+    │  📋 CLIPBOARD FORMAT (Auto-Copied)                     │
+    └────────────────────────────────────────────────────────┘
+```
+
 The skill also copies a compact version to your clipboard:
 
 ```
-[HANDOFF] User Auth Migration | Branch: feature/auth-migration
-STATUS: 65% • BLOCKER: Auth0 tenant config pending
-PROGRESS: Auth0 provider done • TESTING: Starting today
-FILES: src/auth/auth0-provider.ts | src/config/environment.ts | tests/auth0.test.ts
-DECISIONS: Auth0 adoption (25th) • Batch migration (29th) • Dual validation (30th)
-FAILED: DB transaction lock → Use batched migration ✓
-         Client refresh races → Centralize auth context ✓
-         Force logout → Dual validation period ✓
-NEXT: Complete provider init → Staging test → Deploy
-PREV: sess_2026_01_30_145632
+╔════════════════════════════════════════════════════════════════╗
+║ [HANDOFF] User Auth Migration | Branch: feature/auth-migration║
+╠════════════════════════════════════════════════════════════════╣
+║ STATUS: 65% • BLOCKER: Auth0 tenant config pending            ║
+║ PROGRESS: Auth0 provider done • TESTING: Starting today       ║
+╠════════════════════════════════════════════════════════════════╣
+║ FILES:                                                         ║
+║   • src/auth/auth0-provider.ts                                ║
+║   • src/config/environment.ts                                 ║
+║   • tests/auth0.test.ts                                       ║
+╠════════════════════════════════════════════════════════════════╣
+║ DECISIONS:                                                     ║
+║   • Auth0 adoption (25th)                                     ║
+║   • Batch migration (29th)                                    ║
+║   • Dual validation (30th)                                    ║
+╠════════════════════════════════════════════════════════════════╣
+║ FAILED APPROACHES:                                             ║
+║   ✗ DB transaction lock → Use batched migration ✓            ║
+║   ✗ Client refresh races → Centralize auth context ✓         ║
+║   ✗ Force logout → Dual validation period ✓                  ║
+╠════════════════════════════════════════════════════════════════╣
+║ NEXT: Complete provider init → Staging test → Deploy         ║
+║ PREV: sess_2026_01_30_145632                                  ║
+╚════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
 ## Comparison with Alternatives
 
-| Feature | Handoff | Softaworks | Willseltzer | Claude-Mem |
-|---------|---------|-----------|------------|-----------|
+```
+    ╔═══════════════════════════════════════════════════════════╗
+    ║            WHY HANDOFF STANDS OUT                         ║
+    ╚═══════════════════════════════════════════════════════════╝
+```
+
+<div align="center">
+
+| Feature | **Handoff** | Softaworks | Willseltzer | Claude-Mem |
+|:--------|:-----------:|:----------:|:-----------:|:----------:|
 | **Context Capture** | ✅ Comprehensive | ✅ Basic | ✅ Moderate | ✅ Basic |
-| **Clipboard Auto-Copy** | ✅ Yes (pbcopy/xclip) | ❌ No | ✅ Manual copy | ❌ No |
-| **Korean Support** | ✅ Full (unique) | ❌ No | ❌ No | ❌ No |
-| **Git Integration** | ✅ Full (history, diffs) | ✅ Branch only | ⚠️ Limited | ❌ No |
-| **Todo Integration** | ✅ Yes (.claude format) | ❌ No | ❌ No | ✅ Basic |
-| **Failed Approaches** | ✅ Dedicated section | ❌ No | ❌ No | ❌ No |
-| **Handoff Chain** | ✅ Link previous/next | ❌ No | ❌ No | ❌ No |
-| **Secret Detection** | ✅ Yes, with warnings | ❌ No | ❌ No | ❌ No |
-| **Quality Score** | ✅ Detailed scoring | ❌ No | ⚠️ Simple | ❌ No |
+| **Clipboard Auto-Copy** | ✅ pbcopy/xclip | ❌ | ⚠️ Manual | ❌ |
+| **Korean Support** | 🇰🇷 **Full** | ❌ | ❌ | ❌ |
+| **Git Integration** | ✅ Full (history, diffs) | ⚠️ Branch only | ⚠️ Limited | ❌ |
+| **Todo Integration** | ✅ .claude format | ❌ | ❌ | ⚠️ Basic |
+| **Failed Approaches** | ✅ **Dedicated section** | ❌ | ❌ | ❌ |
+| **Handoff Chain** | ⛓️ **Link prev/next** | ❌ | ❌ | ❌ |
+| **Secret Detection** | 🔐 **With warnings** | ❌ | ❌ | ❌ |
+| **Quality Score** | ⭐ **Detailed 0-100** | ❌ | ⚠️ Simple | ❌ |
 | **Session Metadata** | ✅ Comprehensive | ⚠️ Minimal | ✅ Good | ⚠️ Minimal |
-| **Custom Config** | ✅ Full support | ❌ Limited | ⚠️ Some options | ✅ Full |
+| **Custom Config** | ✅ Full support | ⚠️ Limited | ⚠️ Some | ✅ Full |
 | **Claude Code Integration** | ✅ Native | ⚠️ Plugin | ⚠️ Plugin | ✅ Native |
+
+</div>
+
+```
+    ┌────────────────────────────────────────────────────────┐
+    │  🏆 UNIQUE TO HANDOFF                                  │
+    ├────────────────────────────────────────────────────────┤
+    │                                                        │
+    │  🇰🇷  Full Korean language support                     │
+    │  🚫  Failed approaches tracking                        │
+    │  ⛓️   Session chain linking                            │
+    │  🔐  Secret detection & warnings                       │
+    │  ⭐  Quality scoring (0-100)                           │
+    │                                                        │
+    └────────────────────────────────────────────────────────┘
+```
 
 ---
 
 ## Configuration
+
+```
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                   CONFIGURATION OPTIONS                   ║
+    ╚═══════════════════════════════════════════════════════════╝
+```
 
 ### Default Configuration
 
@@ -630,20 +1020,63 @@ Create `.claude/handoffs.config.json`:
 
 ### Using Custom Configuration
 
+```
+    ┌────────────────────────────────────────────────────────┐
+    │  ⚙️  CUSTOM CONFIGURATION EXAMPLES                     │
+    └────────────────────────────────────────────────────────┘
+```
+
+<table>
+<tr>
+<td width="50%">
+
+**📁 Use Config File**
 ```bash
-# Use specific config file
-/handoff "topic" --config /path/to/config.json
+/handoff "topic" \
+  --config /path/to/config.json
+```
 
-# Override single option
-/handoff "topic" --includeGitDiff false
+</td>
+<td width="50%">
 
-# Use Korean output
+**🔧 Override Single Option**
+```bash
+/handoff "topic" \
+  --includeGitDiff false
+```
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+**🇰🇷 Korean Output**
+```bash
 /handoff "topic" --language ko
 ```
+
+</td>
+<td width="50%">
+
+**📋 Custom Clipboard Format**
+```bash
+/handoff "topic" \
+  --clipboardFormat full
+```
+
+</td>
+</tr>
+</table>
 
 ---
 
 ## Advanced Usage
+
+```
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                    ADVANCED FEATURES                      ║
+    ╚═══════════════════════════════════════════════════════════╝
+```
 
 ### Programmatic Access
 
@@ -696,24 +1129,34 @@ fi
 
 ### Secret Detection Details
 
-The skill detects common patterns:
-
 ```
-✓ AWS keys (AKIA...)
-✓ Google API keys
-✓ GitHub tokens (ghp_...)
-✓ Database credentials (postgresql://user:pass)
-✓ API keys in URLs
-✓ Private encryption keys
-✓ JWT secrets
-✓ OAuth tokens
+    ┌────────────────────────────────────────────────────┐
+    │  🔐 SECRET PATTERNS DETECTED                       │
+    ├────────────────────────────────────────────────────┤
+    │                                                    │
+    │  ✓  AWS keys (AKIA...)                            │
+    │  ✓  Google API keys                               │
+    │  ✓  GitHub tokens (ghp_...)                       │
+    │  ✓  Database credentials (postgresql://user:pass) │
+    │  ✓  API keys in URLs                              │
+    │  ✓  Private encryption keys                       │
+    │  ✓  JWT secrets                                   │
+    │  ✓  OAuth tokens                                  │
+    │                                                    │
+    └────────────────────────────────────────────────────┘
 ```
 
-**Security Note:** Handoff files should be kept in `.gitignore` if they contain secrets.
+**🔒 Security Note:** Handoff files should be kept in `.gitignore` if they contain secrets.
 
 ---
 
 ## Contributing
+
+```
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                  CONTRIBUTE TO HANDOFF                    ║
+    ╚═══════════════════════════════════════════════════════════╝
+```
 
 We welcome contributions! Please follow these guidelines:
 
@@ -766,6 +1209,12 @@ Found a bug? [Open an issue](https://github.com/quantsquirrel/claude-code-handof
 ---
 
 ## Troubleshooting
+
+```
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                  TROUBLESHOOTING GUIDE                    ║
+    ╚═══════════════════════════════════════════════════════════╝
+```
 
 ### Handoff Not Copying to Clipboard
 
@@ -836,6 +1285,12 @@ Reduce content scope:
 
 ## Performance Considerations
 
+```
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                 PERFORMANCE OPTIMIZATION                  ║
+    ╚═══════════════════════════════════════════════════════════╝
+```
+
 ### Optimization Tips
 
 1. **Reduce diff size** for large repositories:
@@ -865,24 +1320,55 @@ Reduce content scope:
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+```
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                        MIT LICENSE                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+```
+
+<div align="center">
 
 **Copyright © 2026 Handoff Contributors**
 
-You are free to:
-- Use commercially
-- Modify the source code
-- Distribute copies
-- Include in proprietary software
+MIT License - see [LICENSE](LICENSE) file for details.
 
-Under the conditions of:
-- Including original copyright notice
-- Including license text with distributions
-- Stating significant changes made
+</div>
+
+<table>
+<tr>
+<td width="50%">
+
+**✅ You are FREE to:**
+- ✓ Use commercially
+- ✓ Modify the source code
+- ✓ Distribute copies
+- ✓ Include in proprietary software
+
+</td>
+<td width="50%">
+
+**📋 Under these CONDITIONS:**
+- ✓ Include original copyright notice
+- ✓ Include license text with distributions
+- ✓ State significant changes made
+
+</td>
+</tr>
+</table>
 
 ---
 
 ## 한국어 (Korean)
+
+```
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                                                           ║
+    ║                🇰🇷  한국어 사용 가이드  🇰🇷                 ║
+    ║                                                           ║
+    ║            Korean Language Support & Guide                ║
+    ║                                                           ║
+    ╚═══════════════════════════════════════════════════════════╝
+```
 
 ### 소개
 
@@ -892,38 +1378,139 @@ Under the conditions of:
 
 ### 주요 특징
 
-- 🎯 **포괄적 컨텍스트 캡처** - 프로젝트 상태, 결정사항, 진행상황 자동 기록
-- 📋 **클립보드 자동 복사** - 한 줄의 명령으로 압축된 프롬프트가 클립보드에 복사됨
-- 🔗 **Git 통합** - 커밋 히스토리, 현재 브랜치, 스테이지된 변경사항 자동 포함
-- ✅ **Todo 통합** - `.claude/tasks.json`의 pending/in-progress 작업 자동 포함
-- 🇰🇷 **한국어 지원** - 한국어 라벨과 컨텍스트를 포함한 클립보드 프롬프트
-- 🚫 **실패한 접근법 추적** - 무엇이 작동하지 않았는지 문서화하여 반복 방지
-- ⛓️ **Handoff 체인** - 이전/다음 세션을 연결하여 연속성 유지
-- 🔐 **시크릿 검출** - API 키, 자격증명 등 잠재적 보안 위험 경고
-- ⭐ **품질 점수** - Handoff 완성도를 0-100 점수로 검증
+<table>
+<tr>
+<td width="50%">
+
+```
+┌──────────────────────────┐
+│ 🎯 포괄적 컨텍스트 캡처    │
+├──────────────────────────┤
+│ 프로젝트 상태, 결정사항,   │
+│ 진행상황 자동 기록         │
+└──────────────────────────┘
+```
+
+```
+┌──────────────────────────┐
+│ 🔗 Git 통합               │
+├──────────────────────────┤
+│ 커밋 히스토리, 브랜치,     │
+│ 스테이지된 변경사항 포함   │
+└──────────────────────────┘
+```
+
+```
+┌──────────────────────────┐
+│ 🇰🇷 한국어 지원           │
+├──────────────────────────┤
+│ 한국어 라벨과 컨텍스트를   │
+│ 포함한 클립보드 프롬프트   │
+└──────────────────────────┘
+```
+
+```
+┌──────────────────────────┐
+│ ⛓️ Handoff 체인           │
+├──────────────────────────┤
+│ 이전/다음 세션을 연결하여  │
+│ 연속성 유지               │
+└──────────────────────────┘
+```
+
+</td>
+<td width="50%">
+
+```
+┌──────────────────────────┐
+│ 📋 클립보드 자동 복사      │
+├──────────────────────────┤
+│ 한 줄의 명령으로 압축된    │
+│ 프롬프트가 클립보드에 복사 │
+└──────────────────────────┘
+```
+
+```
+┌──────────────────────────┐
+│ ✅ Todo 통합              │
+├──────────────────────────┤
+│ .claude/tasks.json의      │
+│ 작업 자동 포함            │
+└──────────────────────────┘
+```
+
+```
+┌──────────────────────────┐
+│ 🚫 실패한 접근법 추적      │
+├──────────────────────────┤
+│ 작동하지 않은 것을         │
+│ 문서화하여 반복 방지       │
+└──────────────────────────┘
+```
+
+```
+┌──────────────────────────┐
+│ 🔐 시크릿 검출            │
+├──────────────────────────┤
+│ API 키, 자격증명 등        │
+│ 잠재적 보안 위험 경고      │
+└──────────────────────────┘
+```
+
+</td>
+</tr>
+</table>
+
+```
+    ⭐ 품질 점수: Handoff 완성도를 0-100 점수로 검증
+```
 
 ### 설치
 
-**추천: 플러그인 마켓플레이스 (가장 쉬움)**
+<table>
+<tr>
+<td width="33%">
 
+**🏆 추천 방법**
 ```bash
-# Claude Code 플러그인 마켓플레이스에서 설치
-/plugin marketplace add quantsquirrel/claude-code-handoff
+# 플러그인 마켓플레이스
+/plugin marketplace add \
+  quantsquirrel/\
+  claude-code-handoff
 ```
+✅ 가장 쉬움
+✅ 자동 검증
 
-**또는: 직접 설치**
+</td>
+<td width="33%">
 
+**⚡ 직접 설치**
 ```bash
-# GitHub에서 직접 설치
-/plugin install quantsquirrel/claude-code-handoff
+# GitHub에서
+/plugin install \
+  quantsquirrel/\
+  claude-code-handoff
 ```
+✅ 빠름
+✅ 자동 설정
 
-**또는: 수동 설치**
+</td>
+<td width="33%">
 
+**🔧 수동 설치**
 ```bash
-# Claude Code skills 디렉토리에 복제
-git clone https://github.com/quantsquirrel/claude-code-handoff.git ~/.claude/skills/handoff
+# 저장소 복제
+git clone \
+  https://github.com/\
+  quantsquirrel/\
+  claude-code-handoff.git \
+  ~/.claude/skills/handoff
 ```
+✅ 완전한 제어
+
+</td>
+</tr>
+</table>
 
 ### 사용법
 
@@ -940,53 +1527,108 @@ git clone https://github.com/quantsquirrel/claude-code-handoff.git ~/.claude/ski
 
 ### 결과
 
-`/handoff` 실행 후:
-
-1. ✅ Handoff 문서 생성: `.claude/handoffs/{timestamp}-{topic}.md`
-2. 📋 압축된 프롬프트가 클립보드에 자동 복사
-3. 📊 품질 점수 표시 (0-100)
-4. 🔐 보안 경고 표시 (시크릿 감지 시)
+```
+    ┌────────────────────────────────────────────────┐
+    │  /handoff 실행 후:                             │
+    ├────────────────────────────────────────────────┤
+    │                                                │
+    │  ✅  문서 생성됨                                │
+    │      .claude/handoffs/{timestamp}-{topic}.md   │
+    │                                                │
+    │  📋  클립보드에 복사됨                          │
+    │      압축된 프롬프트 붙여넣기 준비 완료         │
+    │                                                │
+    │  📊  품질 점수 표시                             │
+    │      0-100 점수 및 상세 분석                   │
+    │                                                │
+    │  🔐  보안 검사                                 │
+    │      시크릿 감지 시 경고 표시                   │
+    │                                                │
+    └────────────────────────────────────────────────┘
+```
 
 ### 한국어 사용자를 위한 팁
 
-1. **언어 설정**:
-   ```bash
-   /handoff "주제" --language ko
-   ```
+```
+    ┌────────────────────────────────────────────────────────┐
+    │  💡 한국어로 Handoff 사용하기                           │
+    └────────────────────────────────────────────────────────┘
+```
 
-2. **한국어 클립보드 프롬프트**:
-   ```
-   [인수인계] 사용자 인증 마이그레이션 | 브랜치: feature/auth-migration
-   상태: 65% • 차단 요소: Auth0 테넌트 구성 대기 중
-   진행: Auth0 제공자 완료 • 테스트: 오늘 시작
-   파일: src/auth/auth0-provider.ts | src/config/environment.ts
-   결정사항: Auth0 도입 (25일) • 배치 마이그레이션 (29일) • 이중 검증 (30일)
-   실패한 접근법: DB 트랜잭션 락 → 배치 마이그레이션 사용 ✓
-   다음: 제공자 초기화 완료 → 스테이징 테스트 → 배포
-   ```
+**1. 언어 설정**
+```bash
+/handoff "주제" --language ko
+```
 
-3. **설정 파일** (`.claude/handoffs.config.json`):
-   ```json
-   {
-     "language": "ko",
-     "outputDir": ".claude/handoffs",
-     "clipboardFormat": "compressed"
-   }
-   ```
+**2. 한국어 클립보드 프롬프트 예시**
+```
+┌──────────────────────────────────────────────────────────────┐
+│ [인수인계] 사용자 인증 마이그레이션                           │
+│ 브랜치: feature/auth-migration                               │
+├──────────────────────────────────────────────────────────────┤
+│ 상태: 65% • 차단 요소: Auth0 테넌트 구성 대기 중              │
+│ 진행: Auth0 제공자 완료 • 테스트: 오늘 시작                   │
+├──────────────────────────────────────────────────────────────┤
+│ 파일: src/auth/auth0-provider.ts                             │
+│       src/config/environment.ts                              │
+├──────────────────────────────────────────────────────────────┤
+│ 결정사항:                                                     │
+│   • Auth0 도입 (25일)                                        │
+│   • 배치 마이그레이션 (29일)                                  │
+│   • 이중 검증 (30일)                                         │
+├──────────────────────────────────────────────────────────────┤
+│ 실패한 접근법:                                                │
+│   DB 트랜잭션 락 → 배치 마이그레이션 사용 ✓                   │
+├──────────────────────────────────────────────────────────────┤
+│ 다음: 제공자 초기화 완료 → 스테이징 테스트 → 배포            │
+└──────────────────────────────────────────────────────────────┘
+```
+
+**3. 설정 파일** (`.claude/handoffs.config.json`)
+```json
+{
+  "language": "ko",
+  "outputDir": ".claude/handoffs",
+  "clipboardFormat": "compressed"
+}
+```
 
 ### 한국어 설명
 
-#### Handoff 문서의 주요 섹션
+```
+    ┌────────────────────────────────────────────────────────┐
+    │  📋 Handoff 문서의 주요 섹션                            │
+    └────────────────────────────────────────────────────────┘
+```
+
+<table>
+<tr>
+<td width="50%">
+
+**📌 필수 섹션**
 
 | 섹션 | 설명 |
 |------|------|
-| **컨텍스트 요약** | 현재 목표, 프로젝트 상태, 임계값 정보 |
-| **기술 세부사항** | Git 상태, 활성 작업, 코드 변경사항 |
-| **핵심 결정사항** | 아키텍처 결정, API 설계, 거래 검토 |
-| **실패한 접근법** | 작동하지 않은 것, 그 이유, 교훈 |
-| **Handoff 체인** | 이전 세션 링크, 다음 세션 계획 |
-| **차단 요소** | 현재 차단 요소, 외부 의존성 |
+| **컨텍스트 요약** | 현재 목표, 프로젝트 상태 |
+| **기술 세부사항** | Git 상태, 활성 작업, 코드 변경 |
+| **핵심 결정사항** | 아키텍처 결정, API 설계 |
 | **다음 단계** | 즉시 조치사항, 단기/중기 계획 |
+
+</td>
+<td width="50%">
+
+**🌟 고급 섹션**
+
+| 섹션 | 설명 |
+|------|------|
+| **실패한 접근법** | 작동하지 않은 것, 교훈 |
+| **Handoff 체인** | 이전/다음 세션 링크 |
+| **차단 요소** | 현재 차단 요소, 외부 의존성 |
+| **품질 메트릭** | 코드 커버리지, 성능 지표 |
+
+</td>
+</tr>
+</table>
 
 ### 고급 사용법
 
@@ -1006,7 +1648,17 @@ console.log(`품질 점수: ${handoff.qualityScore}/100`);
 
 ### 문제 해결
 
-**클립보드에 복사되지 않음:**
+```
+    ┌────────────────────────────────────────────────────────┐
+    │  🔧 자주 발생하는 문제 해결                             │
+    └────────────────────────────────────────────────────────┘
+```
+
+<table>
+<tr>
+<td width="50%">
+
+**❌ 클립보드에 복사되지 않음**
 
 ```bash
 # macOS 확인
@@ -1019,62 +1671,177 @@ which xclip
 sudo apt-get install xclip
 ```
 
-**품질 점수가 낮음:**
-- Git 저장소 초기화 확인: `git init`
-- 작업 설명 추가: `.claude/tasks.json`
-- 실패한 접근법 문서화
-- 이전 Handoff 링크: `/handoff "주제" --previous sess_id`
+</td>
+<td width="50%">
+
+**📊 품질 점수가 낮음**
+
+- ✓ Git 저장소 초기화: `git init`
+- ✓ 작업 설명 추가: `.claude/tasks.json`
+- ✓ 실패한 접근법 문서화
+- ✓ 이전 Handoff 링크:
+  `/handoff "주제" --previous sess_id`
+
+</td>
+</tr>
+</table>
 
 ### 피드백 및 기여
 
-한국어 관련 이슈나 기여는 [GitHub Issues](https://github.com/quantsquirrel/claude-code-handoff/issues)를 통해 제출해주세요.
+```
+    ┌────────────────────────────────────────────────────────┐
+    │  💬 한국어 관련 이슈나 기여를 환영합니다!               │
+    └────────────────────────────────────────────────────────┘
+```
+
+<div align="center">
+
+[GitHub Issues에서 제출하기](https://github.com/quantsquirrel/claude-code-handoff/issues)
+
+</div>
 
 ---
 
 ## Support
 
-### Getting Help
+```
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                      GETTING HELP                         ║
+    ╚═══════════════════════════════════════════════════════════╝
+```
 
+<table>
+<tr>
+<td width="50%">
+
+**📚 Resources**
 - **Documentation:** Check the [docs](./docs) directory
 - **Examples:** See [examples](./examples) directory
+
+</td>
+<td width="50%">
+
+**💬 Community**
 - **Issues:** [GitHub Issues](https://github.com/quantsquirrel/claude-code-handoff/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/quantsquirrel/claude-code-handoff/discussions)
 
+</td>
+</tr>
+</table>
+
 ### Citation
+
+<div align="center">
 
 If you use Handoff in your workflow, consider giving it a star on GitHub:
 
 ```
-⭐ github.com/quantsquirrel/claude-code-handoff
+    ⭐ github.com/quantsquirrel/claude-code-handoff ⭐
 ```
+
+</div>
 
 ---
 
 ## Changelog
 
+```
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                      VERSION HISTORY                      ║
+    ╚═══════════════════════════════════════════════════════════╝
+```
+
 ### v1.0.0 (January 31, 2026)
 
-**Initial Release**
+```
+    ┌────────────────────────────────────────────────────────┐
+    │  🎉 INITIAL RELEASE                                    │
+    └────────────────────────────────────────────────────────┘
+```
 
+<table>
+<tr>
+<td width="50%">
+
+**✨ Core Features**
 - ✨ Full handoff document generation
 - 📋 Clipboard auto-copy with pbcopy/xclip
 - 🔗 Git integration with diffs and commit history
 - ✅ Todo list integration
+- 📊 Comprehensive session metadata
+
+</td>
+<td width="50%">
+
+**🌟 Advanced Features**
 - 🇰🇷 Korean language support
 - 🚫 Failed approaches tracking
 - ⛓️ Handoff chain linking
 - 🔐 Secret detection and warnings
 - ⭐ Quality score validation
-- 📊 Comprehensive session metadata
+
+</td>
+</tr>
+</table>
 
 ---
 
 ## Acknowledgments
 
-Built for the Claude Code ecosystem with ❤️
+```
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                     ACKNOWLEDGMENTS                       ║
+    ╚═══════════════════════════════════════════════════════════╝
+```
 
-Special thanks to the Claude Code community for feedback and feature suggestions.
+<div align="center">
+
+**Built for the Claude Code ecosystem with ❤️**
+
+```
+    ┌────────────────────────────────────────────────────┐
+    │                                                    │
+    │  Special thanks to the Claude Code community      │
+    │  for feedback and feature suggestions             │
+    │                                                    │
+    │  🙏 Contributors • 💡 Ideas • 🐛 Bug Reports      │
+    │                                                    │
+    └────────────────────────────────────────────────────┘
+```
+
+</div>
 
 ---
 
-**Ready to hand off? Run `/handoff` and watch your context transfer seamlessly! 🚀**
+```
+    ╔════════════════════════════════════════════════════════════════╗
+    ║                                                                ║
+    ║                  🏃 READY TO PASS THE BATON? 🏃                ║
+    ║                                                                ║
+    ║              Run /handoff and watch your context               ║
+    ║                  transfer seamlessly! 🚀                       ║
+    ║                                                                ║
+    ╚════════════════════════════════════════════════════════════════╝
+```
+
+<div align="center">
+
+```
+    ════════════════════════════════════════════════════════════
+
+         🏃 Pass the baton. Keep the momentum.
+
+         Never explain your codebase twice.
+
+    ════════════════════════════════════════════════════════════
+```
+
+**Built for the Claude Code ecosystem with ❤️**
+
+Made by [QuantSquirrel](https://github.com/quantsquirrel) | [Report Issue](https://github.com/quantsquirrel/claude-code-handoff/issues) | [Contribute](https://github.com/quantsquirrel/claude-code-handoff/blob/main/CONTRIBUTING.md)
+
+```
+    ⭐ Star us on GitHub: github.com/quantsquirrel/claude-code-handoff
+```
+
+</div>
