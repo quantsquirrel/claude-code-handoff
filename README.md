@@ -1122,27 +1122,17 @@ sudo apt-get install xclip
 
 ## Acknowledgments
 
-**Built for the Claude Code ecosystem with ❤️**
-
 Special thanks to the Claude Code community for feedback and feature suggestions.
 
 🙏 Contributors • 💡 Ideas • 🐛 Bug Reports
 
 ---
 
-**🏃 Ready to pass the baton?**
-
-Run `/handoff` and watch your context transfer seamlessly! 🚀
-
----
-
-**Pass the baton. Keep the momentum. Never explain your codebase twice.**
-
-Built for the Claude Code ecosystem with ❤️
+**🏃 Ready to pass the baton?** Run `/handoff` and keep the momentum going!
 
 Made by [QuantSquirrel](https://github.com/quantsquirrel) | [Report Issue](https://github.com/quantsquirrel/claude-code-handoff/issues) | [Contribute](https://github.com/quantsquirrel/claude-code-handoff/blob/main/CONTRIBUTING.md)
 
-⭐ Star us on GitHub: github.com/quantsquirrel/claude-code-handoff
+⭐ **Star us on GitHub:** [claude-code-handoff](https://github.com/quantsquirrel/claude-code-handoff)
 
 <div align="right">
 
