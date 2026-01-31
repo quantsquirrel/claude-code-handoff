@@ -171,6 +171,20 @@ After running `/handoff`:
 ⭐ **Quality Score** - 0-100 validation with breakdown
 🔐 **Security Check** - Warnings if secrets detected
 
+### How to Resume (Important!)
+
+After creating a handoff, follow these steps in your **new session**:
+
+```bash
+# Step 1: Clear the current session
+/clear
+
+# Step 2: Paste the handoff prompt (Cmd+V or Ctrl+V)
+# The compressed context is already in your clipboard!
+```
+
+> ⚠️ **Why `/clear` first?** Without clearing, the pasted context may get cut off or mixed with existing conversation. Always start fresh!
+
 ---
 
 ## Installation
