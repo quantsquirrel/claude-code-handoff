@@ -2,16 +2,15 @@
 
 <div align="center">
 
-<img src="assets/handoff.jpeg" alt="Handoff - Pass the baton between sessions" width="600">
+<img src="assets/handoff.jpeg" alt="Handoff - Pass the baton between sessions">
 
 # 🪄 Handoff
 
-> **Pass the baton. Keep the momentum. Never explain your codebase twice.**
+**[English](#standalone-usage-no-dependencies)** | **[한국어](#한국어-korean)**
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-success?style=flat-square)](https://github.com/anthropics/claude-code)
 [![Version](https://img.shields.io/badge/version-1.2.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-code-handoff)
-[![🇰🇷 Korean](https://img.shields.io/badge/🇰🇷-Korean_Supported-red?style=flat-square)](#한국어-korean)
 
 </div>
 
