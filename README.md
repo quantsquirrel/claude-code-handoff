@@ -1,11 +1,17 @@
+<div id="top"></div>
+
 # 🪄 Handoff
 
 > **Pass the baton. Keep the momentum. Never explain your codebase twice.**
 
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-success)](https://github.com/anthropics/claude-code)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue)](./package.json)
-[![🇰🇷 Korean](https://img.shields.io/badge/🇰🇷-Korean_Supported-red)](#한국어-korean)
+<div align="center">
+
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-success?style=flat-square)](https://github.com/anthropics/claude-code)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-code-handoff)
+[![🇰🇷 Korean](https://img.shields.io/badge/🇰🇷-Korean_Supported-red?style=flat-square)](#한국어-korean)
+
+</div>
 
 **Master context continuity across sessions.** Seamlessly transfer context, decisions, and progress between Claude Code sessions with automatic clipboard integration and quality validation.
 
@@ -18,6 +24,7 @@
 - [What is Handoff?](#what-is-handoff)
 - [Workflow](#workflow)
 - [Features](#features)
+- [Project Structure](#project-structure)
 - [Quick Start](#quick-start)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -93,6 +100,29 @@ Quality validation ensures your handoff is complete:
 - **20 points** - Key files listed
 
 **Target:** 80+ for production handoffs
+
+<div align="right"><a href="#top">⬆️ Back to Top</a></div>
+
+---
+
+## Project Structure
+
+```sh
+└── claude-code-handoff/
+    ├── LICENSE
+    ├── README.md
+    ├── SKILL.md              # Skill definition for Claude Code
+    ├── docs/
+    │   └── ...               # Additional documentation
+    ├── examples/
+    │   └── example-handoff.md
+    ├── hooks/
+    │   ├── auto-handoff.mjs  # Context monitoring hook
+    │   ├── constants.mjs     # Threshold constants (70%, 80%, 90%)
+    │   └── install.sh        # Easy installation script
+    └── scripts/
+        └── validate.sh       # Validation utilities
+```
 
 ---
 
@@ -515,6 +545,8 @@ Logs saved to: `/tmp/auto-handoff-debug.log`
 
 Remove the `PostToolUse` hook entry from `~/.claude/settings.json`.
 
+<div align="right"><a href="#top">⬆️ Back to Top</a></div>
+
 ---
 
 ## Comparison with Alternatives
@@ -547,6 +579,9 @@ Remove the `PostToolUse` hook entry from `~/.claude/settings.json`.
 ---
 
 ## Configuration
+
+<details>
+<summary><b>Click to expand configuration options</b></summary>
 
 ### Default Configuration
 
@@ -604,9 +639,14 @@ Create `.claude/handoffs.config.json`:
 /handoff "topic" --clipboardFormat full
 ```
 
+</details>
+
 ---
 
 ## Advanced Usage
+
+<details>
+<summary><b>Click to expand advanced usage examples</b></summary>
 
 ### Programmatic Access
 
@@ -672,9 +712,14 @@ Handoff detects these secret patterns:
 
 **Security Note:** Handoff files should be kept in `.gitignore` if they contain secrets.
 
+</details>
+
 ---
 
 ## Troubleshooting
+
+<details>
+<summary><b>Click to expand troubleshooting guide</b></summary>
 
 ### Handoff Not Copying to Clipboard
 
@@ -739,6 +784,8 @@ sudo apt-get install xclip
 ```bash
 /handoff "topic" --maxDiffLines 20 --maxCommitsToShow 5
 ```
+
+</details>
 
 ---
 
@@ -1019,6 +1066,8 @@ sudo apt-get install xclip
 
 [GitHub Issues에서 제출하기](https://github.com/quantsquirrel/claude-code-handoff/issues)
 
+<div align="right"><a href="#top">⬆️ Back to Top</a></div>
+
 ---
 
 ## Support
@@ -1092,3 +1141,11 @@ Built for the Claude Code ecosystem with ❤️
 Made by [QuantSquirrel](https://github.com/quantsquirrel) | [Report Issue](https://github.com/quantsquirrel/claude-code-handoff/issues) | [Contribute](https://github.com/quantsquirrel/claude-code-handoff/blob/main/CONTRIBUTING.md)
 
 ⭐ Star us on GitHub: github.com/quantsquirrel/claude-code-handoff
+
+<div align="right">
+
+[![Back to Top][back-to-top]](#top)
+
+</div>
+
+[back-to-top]: https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square
