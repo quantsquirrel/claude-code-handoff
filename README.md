@@ -48,19 +48,16 @@
 
 ## Workflow
 
-```mermaid
-flowchart LR
-    A[Session 1<br/>Working] -->|/handoff| B[📋 Generate<br/>Document]
-    B -->|Auto-copy| C[📋 Clipboard]
-    C -->|Paste| D[Session 2<br/>Continue]
-
-    B --> E[⭐ Quality Score]
-    B --> F[🔐 Security Check]
-
-    style A fill:#e1f5ff
-    style D fill:#e1f5ff
-    style B fill:#fff4e6
-    style C fill:#f3e5f5
+```
+Session 1          /handoff           Session 2
+    │                  │                  │
+    ▼                  ▼                  ▼
+┌────────┐      ┌────────────┐      ┌────────┐
+│Working │ ───► │  📋 Save   │ ───► │Continue│
+│        │      │  📎 Copy   │      │        │
+└────────┘      │  ⭐ Score  │      └────────┘
+                │  🔐 Check  │
+                └────────────┘
 ```
 
 **No re-explaining required.** Everything you need transfers automatically.
