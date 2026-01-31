@@ -43,6 +43,7 @@
 - [Usage](#usage)
 - [Output Format](#output-format)
 - [Auto-Handoff Hook](#auto-handoff-hook)
+- [Compact Recovery](#compact-recovery)
 - [Comparison](#comparison-with-alternatives)
 - [Configuration](#configuration)
 - [Advanced Usage](#advanced-usage)
@@ -416,6 +417,45 @@ Remove the `PostToolUse` hook entry from `~/.claude/settings.json`.
 
 ---
 
+## Compact Recovery
+
+When context gets compacted during handoff generation, recovery mechanisms help preserve your work.
+
+### Auto-Draft
+
+At 70% context usage, an automatic draft is saved:
+
+| Field | Description |
+|-------|-------------|
+| Location | `.claude/handoffs/.draft-{timestamp}.json` |
+| Contains | Session ID, tokens, git branch, working directory |
+| Auto-cleanup | Previous drafts from same session are replaced |
+
+### Recovery Script
+
+Check for recoverable data:
+
+```bash
+node ~/.claude/skills/handoff/hooks/recover.mjs
+```
+
+**Output:**
+- Lists all draft files with timestamps
+- Shows interrupted generation (lock files)
+- Provides recovery instructions
+
+### Lockfile
+
+During handoff generation:
+- Lock file created: `.claude/handoffs/.generating.lock`
+- Contains: session ID, topic, start time
+- Removed on successful completion
+- Detected by recovery script if interrupted
+
+<div align="right"><a href="#top">⬆️ Back to Top</a></div>
+
+---
+
 ## Comparison with Alternatives
 
 ### Why Handoff Stands Out
@@ -771,6 +811,16 @@ See [LICENSE](LICENSE) file for details.
 ---
 
 ## Changelog
+
+### v1.3.0 (February 1, 2026)
+
+**Recovery Features**
+
+- 🔄 New: Compact recovery mechanism for interrupted handoffs
+- 📝 Auto-draft at 70% context usage (`.claude/handoffs/.draft-{timestamp}.json`)
+- 🔒 Lock file tracking during generation (`.claude/handoffs/.generating.lock`)
+- 🛠️ Recovery script to check and restore interrupted sessions
+- 🧹 Auto-cleanup of previous drafts from same session
 
 ### v1.2.0 (February 1, 2026)
 
