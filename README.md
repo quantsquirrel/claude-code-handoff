@@ -197,51 +197,29 @@ npm install
 ### Basic Syntax
 
 ```bash
-/handoff [topic]
+/handoff [output-path]
 ```
 
 **Parameters:**
-- `topic` (optional) - Brief description of what you're handing off. If omitted, uses git branch name or current timestamp.
+- `output-path` (optional) - Custom path for the handoff document
+  - If omitted: `.claude/handoffs/handoff-YYYYMMDD-HHMMSS.md`
+  - If specified: Saves to the given path
 
 ### Examples
 
-#### 1. Simple Handoff with Topic
-
 ```bash
-/handoff "user authentication migration"
+# Default location
+/handoff
+
+# Custom path
+/handoff .claude/handoffs/session-1.md
+/handoff docs/handoff-auth-feature.md
 ```
 
 **Result:**
-- Document: `.claude/handoffs/2026-01-31-123456-auth-migration.md`
-- Clipboard: Compressed prompt (892 chars) ready to paste
-- Quality Score: 87/100
-
-#### 2. Interactive Mode
-
-```bash
-/handoff --interactive
-```
-
-Prompts you with questions:
-- What's the main topic?
-- Current blockers?
-- Next priorities?
-- Previous handoff ID?
-
-#### 3. Auto-Detect from Git Branch
-
-```bash
-# On branch: feature/dark-mode-redesign
-/handoff
-```
-
-Auto-detected topic: `dark-mode-redesign`
-
-#### 4. With Custom Config
-
-```bash
-/handoff "database optimization" --config my-config.json
-```
+- Document saved to specified path
+- Summary copied to clipboard (ready to paste)
+- Quality Score displayed (target: 70+)
 
 ---
 
@@ -249,7 +227,7 @@ Auto-detected topic: `dark-mode-redesign`
 
 ### Handoff Document Structure
 
-Every handoff creates a markdown file at `.claude/handoffs/{date}-{time}-{topic}.md`
+Every handoff creates a markdown file at `.claude/handoffs/handoff-YYYYMMDD-HHMMSS.md`
 
 | Section | Content |
 |---------|---------|
@@ -481,143 +459,6 @@ During handoff generation:
 - ⭐ Quality scoring (0-100)
 - 🔔 Auto-handoff hook (context monitoring)
 
----
-
-## Configuration
-
-<details>
-<summary><b>Click to expand configuration options</b></summary>
-
-### Default Configuration
-
-Create `.claude/handoffs.config.json`:
-
-```json
-{
-  "outputDir": ".claude/handoffs",
-  "includeGitDiff": true,
-  "includeTaskList": true,
-  "secretDetection": true,
-  "qualityValidation": true,
-  "clipboardFormat": "compressed",
-  "language": "en",
-  "maxDiffLines": 50,
-  "maxCommitsToShow": 10,
-  "includeEnvironmentVariables": false,
-  "failedApproachesRequired": false,
-  "handoffChainTracking": true,
-  "encryptSensitiveData": false
-}
-```
-
-### Configuration Options
-
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `outputDir` | string | `.claude/handoffs` | Where to save handoff documents |
-| `includeGitDiff` | boolean | `true` | Include file diffs in output |
-| `includeTaskList` | boolean | `true` | Include .claude/tasks.json in output |
-| `secretDetection` | boolean | `true` | Scan for API keys and credentials |
-| `qualityValidation` | boolean | `true` | Calculate and display quality score |
-| `clipboardFormat` | string | `compressed` | `compressed` or `full` |
-| `language` | string | `en` | `en` or `ko` (Korean) |
-| `maxDiffLines` | number | `50` | Maximum lines per file diff |
-| `maxCommitsToShow` | number | `10` | Recent commits to include |
-| `includeEnvironmentVariables` | boolean | `false` | Include env vars (security risk) |
-| `failedApproachesRequired` | boolean | `false` | Enforce failed approaches section |
-| `handoffChainTracking` | boolean | `true` | Track previous/next sessions |
-| `encryptSensitiveData` | boolean | `false` | Encrypt handoff file contents |
-
-### Usage Examples
-
-```bash
-# Use config file
-/handoff "topic" --config /path/to/config.json
-
-# Override single option
-/handoff "topic" --includeGitDiff false
-
-# Korean output
-/handoff "topic" --language ko
-
-# Custom clipboard format
-/handoff "topic" --clipboardFormat full
-```
-
-</details>
-
----
-
-## Advanced Usage
-
-<details>
-<summary><b>Click to expand advanced usage examples</b></summary>
-
-### Programmatic Access
-
-```javascript
-const { createHandoff } = require('@claude-code/handoff');
-
-const handoff = await createHandoff({
-  topic: 'database migration',
-  config: {
-    outputDir: './.handoffs',
-    language: 'ko'
-  }
-});
-
-console.log(`Created: ${handoff.path}`);
-console.log(`Quality Score: ${handoff.qualityScore}/100`);
-console.log(`Clipboard: ${handoff.clipboardPrompt}`);
-```
-
-### Extending Handoff
-
-Add custom sections:
-
-```javascript
-const handoff = await createHandoff({
-  topic: 'feature-x',
-  customSections: {
-    'Performance Metrics': async () => {
-      return await getPerformanceStats();
-    },
-    'Team Updates': async () => {
-      return await fetchTeamMessages();
-    }
-  }
-});
-```
-
-### Automation
-
-Create a pre-commit hook for automatic handoffs:
-
-```bash
-#!/bin/bash
-# .git/hooks/pre-commit
-
-if [ "$AUTO_HANDOFF" = "true" ]; then
-  /handoff --auto --topic "auto-commit-$(date +%s)"
-fi
-```
-
-### Secret Detection
-
-Handoff detects these secret patterns:
-
-- AWS keys (AKIA...)
-- Google API keys
-- GitHub tokens (ghp_...)
-- Database credentials (postgresql://user:pass)
-- API keys in URLs
-- Private encryption keys
-- JWT secrets
-- OAuth tokens
-
-**Security Note:** Handoff files should be kept in `.gitignore` if they contain secrets.
-
-</details>
 
 ---
 
@@ -628,7 +469,7 @@ Handoff detects these secret patterns:
 
 ### Handoff Not Copying to Clipboard
 
-**Problem:** Compressed prompt not appearing in clipboard
+**Problem:** Summary not appearing in clipboard
 
 **Solutions:**
 
@@ -641,15 +482,10 @@ which pbcopy
 which xclip
 ```
 
-2. Grant permissions if needed:
+2. Install if needed:
 ```bash
 # Linux
 sudo apt-get install xclip
-```
-
-3. Use alternative output method:
-```bash
-/handoff "topic" --output file  # Save to file instead
 ```
 
 ### Quality Score Too Low
@@ -658,68 +494,15 @@ sudo apt-get install xclip
 
 **Possible reasons:**
 - Missing git repository or commits
-- No pending tasks in `.claude/tasks.json`
+- No pending tasks
 - Incomplete failed approaches section
-- No previous handoff chain
 
 **Improvements:**
 - Ensure git is initialized: `git init`
-- Add task descriptions to `.claude/tasks.json`
 - Document what didn't work during your session
-- Link to previous session: `/handoff "topic" --previous sess_id`
-
-### Secret Detection False Positives
-
-**Problem:** Legitimate strings flagged as secrets
-
-**Solution:** Create `.handoffignore` for safe patterns:
-
-```
-# .handoffignore
-^\$\{.*\}$  # Ignore template variables
-^test-.*$   # Ignore test API keys
-```
-
-### Large Handoff Files
-
-**Problem:** Handoff document too large (>10MB)
-
-**Solution:** Reduce content scope:
-
-```bash
-/handoff "topic" --maxDiffLines 20 --maxCommitsToShow 5
-```
+- Fill all required sections in the handoff
 
 </details>
-
----
-
-## Performance
-
-### Optimization Tips
-
-1. **Reduce diff size** for large repositories:
-```bash
-/handoff "topic" --maxDiffLines 30
-```
-
-2. **Limit commit history:**
-```bash
-/handoff "topic" --maxCommitsToShow 5
-```
-
-3. **Skip optional sections** to speed up generation:
-```bash
-/handoff "topic" --skipSecretDetection --skipQualityScore
-```
-
-### Generation Time
-
-| Repository Size | Typical Time | Notes |
-|-----------------|-------------|-------|
-| Small (<1k files) | 2-3 seconds | Usually instant |
-| Medium (1k-10k files) | 5-10 seconds | Depends on diff size |
-| Large (10k+ files) | 15-30 seconds | Limit diffs accordingly |
 
 ---
 

@@ -103,14 +103,12 @@ npm install
 ## 사용법
 
 ```bash
-# 주제와 함께 handoff 생성
-/handoff "인증 리팩토링"
-
-# Git 브랜치에서 주제 자동 감지
+# 기본 위치에 저장
 /handoff
 
-# 상호 대화 모드
-/handoff --interactive
+# 사용자 지정 경로에 저장
+/handoff .claude/handoffs/session-1.md
+/handoff docs/handoff-auth-feature.md
 ```
 
 ---
@@ -119,9 +117,9 @@ npm install
 
 `/handoff` 실행 후:
 
-✅ **문서 생성됨** - `.claude/handoffs/{timestamp}-{topic}.md`
+✅ **문서 생성됨** - `.claude/handoffs/handoff-YYYYMMDD-HHMMSS.md`
 📋 **클립보드에 복사됨** - 압축된 프롬프트 붙여넣기 준비 완료
-📊 **품질 점수 표시** - 0-100 점수 및 상세 분석
+📊 **품질 점수 표시** - 0-100 점수 (목표: 70+)
 🔐 **보안 검사** - 시크릿 감지 시 경고 표시
 
 ### 세션 재개 방법 (중요!)
@@ -197,30 +195,6 @@ node ~/.claude/skills/handoff/hooks/recover.mjs
 
 ---
 
-## 설정
-
-`.claude/handoffs.config.json` 파일 생성:
-
-```json
-{
-  "language": "ko",
-  "outputDir": ".claude/handoffs",
-  "clipboardFormat": "compressed"
-}
-```
-
-### 설정 옵션
-
-| 옵션 | 타입 | 기본값 | 설명 |
-|------|------|--------|------|
-| `outputDir` | string | `.claude/handoffs` | 핸드오프 문서 저장 위치 |
-| `language` | string | `en` | `en` 또는 `ko` (한국어) |
-| `clipboardFormat` | string | `compressed` | `compressed` 또는 `full` |
-| `secretDetection` | boolean | `true` | API 키 및 자격증명 스캔 |
-| `qualityValidation` | boolean | `true` | 품질 점수 계산 및 표시 |
-
----
-
 ## 문제 해결
 
 ### 클립보드에 복사되지 않음
@@ -229,19 +203,15 @@ node ~/.claude/skills/handoff/hooks/recover.mjs
 # macOS 확인
 which pbcopy
 
-# Linux 확인
-which xclip
-
-# 설치 필요 시
-sudo apt-get install xclip
+# Linux 확인 및 설치
+which xclip || sudo apt-get install xclip
 ```
 
 ### 품질 점수가 낮음
 
 - ✓ Git 저장소 초기화: `git init`
-- ✓ 작업 설명 추가: `.claude/tasks.json`
 - ✓ 실패한 접근법 문서화
-- ✓ 이전 Handoff 링크: `/handoff "주제" --previous sess_id`
+- ✓ 모든 필수 섹션 작성
 
 ---
 
