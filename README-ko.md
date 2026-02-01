@@ -4,15 +4,13 @@
 
 <img src="assets/handoff.jpeg" alt="Handoff - 세션 간 바톤을 전달하세요">
 
-# Handoff
+**바톤을 넘기세요. 모멘텀을 유지하세요. 코드베이스를 두 번 설명하지 마세요.**
 
 **[English](README.md)** | **한국어**
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-success?style=flat-square)](https://github.com/anthropics/claude-code)
 [![Version](https://img.shields.io/badge/version-1.2.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-handoff)
-
-**바톤을 넘기세요. 모멘텀을 유지하세요. 코드베이스를 두 번 설명하지 마세요.**
 
 </div>
 
