@@ -42,7 +42,6 @@
 - [Output Format](#output-format)
 - [Auto-Handoff Hook](#auto-handoff-hook)
 - [Compact Recovery](#compact-recovery)
-- [Comparison](#comparison-with-alternatives)
 - [Configuration](#configuration)
 - [Advanced Usage](#advanced-usage)
 - [Troubleshooting](#troubleshooting)
@@ -429,36 +428,6 @@ During handoff generation:
 - Detected by recovery script if interrupted
 
 <div align="right"><a href="#top">⬆️ Back to Top</a></div>
-
----
-
-## Comparison with Alternatives
-
-### Why Handoff Stands Out
-
-| Feature | **Handoff** | Softaworks | Willseltzer | Claude-Mem |
-|:--------|:-----------:|:----------:|:-----------:|:----------:|
-| Context Capture | ✅ Comprehensive | ✅ Basic | ✅ Moderate | ✅ Basic |
-| Clipboard Auto-Copy | ✅ pbcopy/xclip | ❌ | ⚠️ Manual | ❌ |
-| Korean Support | 🇰🇷 **Full** | ❌ | ❌ | ❌ |
-| Git Integration | ✅ Full | ⚠️ Branch only | ⚠️ Limited | ❌ |
-| TODO Integration | ✅ .claude format | ❌ | ❌ | ⚠️ Basic |
-| Failed Approaches | ✅ **Dedicated section** | ❌ | ❌ | ❌ |
-| Handoff Chain | ⛓️ **Link prev/next** | ❌ | ❌ | ❌ |
-| Secret Detection | 🔐 **With warnings** | ❌ | ❌ | ❌ |
-| Quality Score | ⭐ **Detailed 0-100** | ❌ | ⚠️ Simple | ❌ |
-| Auto-Handoff Hook | 🔔 **Context monitor** | ❌ | ❌ | ❌ |
-| Session Metadata | ✅ Comprehensive | ⚠️ Minimal | ✅ Good | ⚠️ Minimal |
-
-### Unique to Handoff
-
-- 🇰🇷 Full Korean language support
-- 🚫 Failed approaches tracking
-- ⛓️ Session chain linking
-- 🔐 Secret detection & warnings
-- ⭐ Quality scoring (0-100)
-- 🔔 Auto-handoff hook (context monitoring)
-
 
 ---
 
