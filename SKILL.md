@@ -1,3 +1,8 @@
+---
+name: handoff
+description: Save session context to clipboard. Resume anytime with Cmd+V.
+---
+
 # Handoff Skill
 
 **Pass the baton. Keep the momentum.**
