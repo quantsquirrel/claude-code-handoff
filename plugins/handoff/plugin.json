@@ -5,11 +5,5 @@
   "author": {
     "name": "quantsquirrel"
   },
-  "commands": [
-    {
-      "name": "handoff",
-      "description": "Save session context to clipboard",
-      "source": "./SKILL.md"
-    }
-  ]
+  "commands": "./"
 }
