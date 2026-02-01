@@ -4,7 +4,7 @@
 
 <img src="assets/handoff.jpeg" alt="Handoff - Pass the baton between sessions">
 
-# 🪄 Handoff
+# Handoff
 
 **English** | **[한국어](README-ko.md)**
 
@@ -12,7 +12,7 @@
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-success?style=flat-square)](https://github.com/anthropics/claude-code)
 [![Version](https://img.shields.io/badge/version-1.2.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-handoff)
 
-**Master context continuity across sessions.**
+**Pass the baton. Keep the momentum. Never explain your codebase twice.**
 
 </div>
 
