@@ -43,6 +43,26 @@ curl -o ~/.claude/commands/handoff.md \
 
 ---
 
+## Updating
+
+### Marketplace Users
+
+```bash
+/plugin update handoff
+```
+
+### Git Clone Users
+
+```bash
+cd ~/.claude/skills/handoff && git pull
+```
+
+### Manual Install Users
+
+Re-run the curl command from Quick Start to download the latest version.
+
+---
+
 ## What is Handoff?
 
 | Without Handoff | With Handoff |

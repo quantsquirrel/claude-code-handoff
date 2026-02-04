@@ -100,6 +100,26 @@ cd ~/.claude/skills/handoff && bash hooks/install.sh
 
 ---
 
+## 업데이트
+
+### Marketplace 사용자
+
+```bash
+/plugin update handoff
+```
+
+### Git Clone 사용자
+
+```bash
+cd ~/.claude/skills/handoff && git pull
+```
+
+### 수동 설치 사용자
+
+빠른 시작의 curl 명령어를 다시 실행하여 최신 버전을 다운로드하세요.
+
+---
+
 ## 사용법
 
 ### 워크플로우
