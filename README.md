@@ -10,7 +10,7 @@
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-success?style=flat-square)](https://github.com/anthropics/claude-code)
-[![Version](https://img.shields.io/badge/version-2.0.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-handoff)
+[![Version](https://img.shields.io/badge/version-2.1.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-handoff)
 [![Task Size Detection](https://img.shields.io/badge/Task%20Size-Dynamic-orange?style=flat-square)](https://github.com/quantsquirrel/claude-handoff)
 
 </div>
@@ -74,6 +74,25 @@ curl -o ~/.claude/commands/handoff.md \
 
 ---
 
+## Hierarchical Summary (v2.1)
+
+Choose your summary detail level:
+
+| Level | Tokens | Content |
+|-------|--------|---------|
+| L1 | ~100 | Current task + Next step |
+| L2 | ~300 | L1 + Decisions + Failed approaches |
+| L3 | ~500 | Full context (same as slow) |
+
+Usage:
+```bash
+/handoff l1 "topic"    # Quick snapshot
+/handoff l2 "topic"    # Balanced (default)
+/handoff l3 "topic"    # Full detail
+```
+
+---
+
 ## Workflow
 
 ```
@@ -104,6 +123,19 @@ Session 1 → /handoff → Cmd+V → Session 2
 - Current task (1 sentence)
 - Active files (max 5)
 - Next step
+
+---
+
+## Structured Output Format (v2.1)
+
+Handoff now supports JSON-structured metadata alongside natural language:
+
+- `files_modified`: Exact paths and line numbers
+- `functions_touched`: Function names and actions
+- `failed_approaches`: What didn't work and why
+- `decisions`: Choices made with rationale
+
+This structured format enables better parsing by LLMs and integration with external tools.
 
 ---
 
@@ -144,7 +176,16 @@ Sensitive data is auto-detected and redacted:
 ```
 API_KEY=sk-1234...  → API_KEY=***REDACTED***
 PASSWORD=secret     → PASSWORD=***REDACTED***
+Authorization: Bearer eyJ...  → Authorization: Bearer ***REDACTED***
 ```
+
+**Detection includes:**
+- API keys and secrets
+- JWT tokens and Base64-encoded credentials
+- Bearer tokens in Authorization headers
+- Environment variables with sensitive patterns
+
+**GDPR Consideration:** Handoff documents may contain personal data. Review handoffs before sharing with third parties and delete old handoffs regularly.
 
 ---
 

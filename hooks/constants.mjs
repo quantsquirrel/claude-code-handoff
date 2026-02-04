@@ -158,3 +158,81 @@ export const FILE_COUNT_THRESHOLDS = {
  * Task size state file
  */
 export const TASK_SIZE_STATE_FILE = 'task-size-state.json';
+
+// ==========================================
+// Security Patterns (Synod Recommendation)
+// ==========================================
+
+/**
+ * Enhanced security patterns for detecting and masking sensitive data.
+ * These patterns help prevent accidental exposure of credentials, tokens, and secrets.
+ *
+ * @type {RegExp[]}
+ */
+export const SECURITY_PATTERNS = [
+  // JWT tokens
+  /eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+/g,
+  // Base64 encoded secrets (40+ chars)
+  /[A-Za-z0-9+/]{40,}={0,2}/g,
+  // Environment variable references
+  /process\.env\.[A-Z_]+/g,
+  // Bearer tokens
+  /Bearer\s+[^\s]+/gi,
+  // AWS Access Keys
+  /AKIA[0-9A-Z]{16}/g,
+  // Generic API keys
+  /[a-zA-Z0-9_-]*(?:api[_-]?key|apikey|secret|token|password|credential)[a-zA-Z0-9_-]*\s*[:=]\s*['"]?[^\s'"]+/gi,
+];
+
+/**
+ * Safe key names for JSON schema.
+ * Defines allowed keys and forbidden patterns to prevent sensitive data in key names.
+ *
+ * @type {Object}
+ * @property {string[]} ALLOWED_KEYS - Whitelisted key names for handoff documents
+ * @property {RegExp[]} FORBIDDEN_PATTERNS - Patterns that should not appear in key names
+ */
+export const SAFE_KEY_SCHEMA = {
+  ALLOWED_KEYS: ['topic', 'summary', 'files', 'decisions', 'approaches', 'next_step'],
+  FORBIDDEN_PATTERNS: [/password/i, /secret/i, /key/i, /token/i, /credential/i, /ssn/i, /email/i],
+};
+
+/**
+ * Masks sensitive data in text using predefined security patterns.
+ *
+ * @param {string} text - Text to mask
+ * @returns {string} Text with sensitive data replaced with '***REDACTED***'
+ *
+ * @example
+ * maskSensitiveData('Bearer abc123xyz')
+ * // Returns: '***REDACTED***'
+ *
+ * @example
+ * maskSensitiveData('API_KEY=secret123')
+ * // Returns: '***REDACTED***'
+ */
+export function maskSensitiveData(text) {
+  let masked = text;
+  for (const pattern of SECURITY_PATTERNS) {
+    masked = masked.replace(pattern, '***REDACTED***');
+  }
+  return masked;
+}
+
+/**
+ * Validates if a key name is safe and doesn't contain forbidden patterns.
+ *
+ * @param {string} keyName - Key name to validate
+ * @returns {boolean} True if key name is safe, false if it contains forbidden patterns
+ *
+ * @example
+ * validateKeyName('topic')
+ * // Returns: true
+ *
+ * @example
+ * validateKeyName('user_password')
+ * // Returns: false
+ */
+export function validateKeyName(keyName) {
+  return !SAFE_KEY_SCHEMA.FORBIDDEN_PATTERNS.some(p => p.test(keyName));
+}

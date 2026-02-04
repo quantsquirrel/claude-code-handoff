@@ -10,7 +10,8 @@
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-success?style=flat-square)](https://github.com/anthropics/claude-code)
-[![Version](https://img.shields.io/badge/version-1.2.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-handoff)
+[![Version](https://img.shields.io/badge/version-2.1.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-handoff)
+[![Task Size Detection](https://img.shields.io/badge/Task%20Size-Dynamic-orange?style=flat-square)](https://github.com/quantsquirrel/claude-handoff)
 
 </div>
 
@@ -102,12 +103,37 @@ cd ~/.claude/skills/handoff && bash hooks/install.sh
 ## 사용법
 
 ```bash
-# 기본 위치에 저장
-/handoff
+/handoff fast [주제]        # 빠른 체크포인트 (~200 토큰)
+/handoff slow [주제]        # 전체 핸드오프 (~500 토큰)
+/handoff [주제]             # slow의 별칭
+```
 
-# 사용자 지정 경로에 저장
-/handoff .claude/handoffs/session-1.md
-/handoff docs/handoff-auth-feature.md
+<sub>예시: `/handoff fast "auth 구현"` · `/handoff slow "JWT migration"`</sub>
+
+| 상황 | 명령어 |
+|------|--------|
+| 컨텍스트 70%+ 도달 | `/handoff fast` |
+| 짧은 휴식 (< 1시간) | `/handoff fast` |
+| 세션 종료 | `/handoff slow` |
+| 긴 휴식 (2시간+) | `/handoff slow` |
+
+---
+
+## 계층적 요약 (v2.1)
+
+요약 상세도를 선택하세요:
+
+| 레벨 | 토큰 | 내용 |
+|------|------|------|
+| L1 | ~100 | 현재 작업 + 다음 단계 |
+| L2 | ~300 | L1 + 결정사항 + 실패한 접근법 |
+| L3 | ~500 | 전체 컨텍스트 (slow와 동일) |
+
+사용법:
+```bash
+/handoff l1 "주제"    # 빠른 스냅샷
+/handoff l2 "주제"    # 균형잡힌 (기본값)
+/handoff l3 "주제"    # 전체 상세
 ```
 
 ---
@@ -134,6 +160,19 @@ cd ~/.claude/skills/handoff && bash hooks/install.sh
 ```
 
 > ⚠️ **왜 `/clear`를 먼저?** 초기화 없이 붙여넣으면 컨텍스트가 잘리거나 기존 대화와 섞일 수 있습니다. 항상 새로 시작하세요!
+
+---
+
+## 구조화된 출력 형식 (v2.1)
+
+Handoff는 이제 자연어와 함께 JSON 구조화된 메타데이터를 지원합니다:
+
+- `files_modified`: 정확한 경로와 줄 번호
+- `functions_touched`: 함수 이름과 작업
+- `failed_approaches`: 작동하지 않은 방법과 이유
+- `decisions`: 근거와 함께 내린 선택
+
+이 구조화된 형식은 LLM의 더 나은 파싱과 외부 도구와의 통합을 가능하게 합니다.
 
 ---
 
@@ -191,6 +230,26 @@ node ~/.claude/skills/handoff/hooks/recover.mjs
 - 중단 시 복구 스크립트에서 감지
 
 <div align="right"><a href="#top">⬆️ 맨 위로</a></div>
+
+---
+
+## 보안
+
+민감한 데이터는 자동으로 감지되어 삭제됩니다:
+
+```
+API_KEY=sk-1234...  → API_KEY=***REDACTED***
+PASSWORD=secret     → PASSWORD=***REDACTED***
+Authorization: Bearer eyJ...  → Authorization: Bearer ***REDACTED***
+```
+
+**감지 항목:**
+- API 키 및 시크릿
+- JWT 토큰 및 Base64 인코딩된 자격증명
+- Authorization 헤더의 Bearer 토큰
+- 민감한 패턴을 가진 환경 변수
+
+**GDPR 고려사항:** 핸드오프 문서에는 개인 데이터가 포함될 수 있습니다. 제3자와 공유하기 전에 핸드오프를 검토하고 오래된 핸드오프는 정기적으로 삭제하세요.
 
 ---
 
