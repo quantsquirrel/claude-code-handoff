@@ -2,16 +2,16 @@
 
 <div align="center">
 
-<img src="assets/handoff.jpeg" alt="Handoff - 세션 간 바톤을 전달하세요">
+<img src="assets/handoff.jpeg" alt="Handoff Baton - 원시 기록이 아닌 바톤을 넘기세요">
 
-**바톤을 넘기세요. 모멘텀을 유지하세요. 코드베이스를 두 번 설명하지 마세요.**
+**원시 기록을 넘기지 마세요. 바톤을 넘기세요 — 증류되고, 구조화되고, 바로 달릴 준비가 된.**
 
 **[English](README.md)** | **한국어**
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-success?style=flat-square)](https://github.com/anthropics/claude-code)
-[![Version](https://img.shields.io/badge/version-2.1.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-handoff)
-[![Task Size Detection](https://img.shields.io/badge/Task%20Size-Dynamic-orange?style=flat-square)](https://github.com/quantsquirrel/claude-handoff)
+[![Version](https://img.shields.io/badge/version-2.1.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-handoff-baton)
+[![Task Size Detection](https://img.shields.io/badge/Task%20Size-Dynamic-orange?style=flat-square)](https://github.com/quantsquirrel/claude-handoff-baton)
 
 </div>
 
@@ -21,7 +21,7 @@
 
 ```bash
 # 1. 설치
-/plugin install quantsquirrel/claude-handoff
+/plugin install quantsquirrel/claude-handoff-baton
 
 # 2. 사용
 /handoff
@@ -34,7 +34,8 @@
 ## 목차
 
 - [빠른 시작](#빠른-시작)
-- [Handoff란?](#handoff란)
+- [Handoff Baton이란?](#handoff-baton이란)
+- [`--continue`만으로 충분하지 않은 이유](#--continue만으로-충분하지-않은-이유)
 - [주요 특징](#주요-특징)
 - [설치](#설치)
 - [사용법](#사용법)
@@ -47,17 +48,40 @@
 
 ---
 
-## Handoff란?
+## Handoff Baton이란?
 
-| Handoff 없이 | Handoff 사용 시 |
-|--------------|-----------------|
-| ❌ 매 세션마다 컨텍스트 재설명 | ✅ 자동 컨텍스트 캡처 |
-| ❌ 실패한 접근법 반복 | ✅ 실패한 접근법 추적 |
-| ❌ 결정사항 및 진행상황 손실 | ✅ 결정사항 문서화 |
-| ❌ 수동 노트 작성 | ✅ 한 줄 명령으로 생성 |
-| ❌ 불완전한 인수인계 | ✅ 품질 점수 검증 |
+**`--continue`가 대화를 복원한다면, Handoff는 바톤을 넘깁니다 — 증류되고, 구조화되고, 바로 달릴 준비가 된.**
 
-**한 번의 명령. 완전한 컨텍스트. 재설명 제로.**
+| `--continue` (원시 히스토리) | Handoff Baton (증류된 지식) |
+|---------------------------|-------------------------------|
+| 전체 메시지 히스토리 로드 (100K+ 토큰) | 핵심만 추출 (100-500 토큰) |
+| 도구 호출, 파일 읽기, 에러 모두 재생 | 결정, 실패, 다음 단계만 캡처 |
+| 같은 세션, 같은 기기에서만 작동 | 클립보드: 어떤 세션, 어떤 기기, 어떤 AI에서든 |
+| 실패한 접근법이 노이즈에 묻힘 | 실패한 접근법을 명시적으로 추적 |
+| 정보 우선순위 없음 | 필요에 맞는 계층 (L1/L2/L3) |
+
+**하나의 명령. 하나의 바톤. 500배 압축.**
+
+---
+
+## `--continue`만으로 충분하지 않은 이유
+
+`claude --continue`는 짧은 휴식에 적합합니다. 하지만 한계가 있습니다:
+
+- **토큰 낭비**: 도구 출력, 파일 내용, 막다른 골목까지 *모든 것*을 복원. 200K 컨텍스트가 빠르게 소진됩니다.
+- **지식 추출 없음**: 원시 히스토리는 중요한 것을 강조하지 않습니다. 실패한 접근법이 노이즈에 묻힙니다.
+- **단일 도구 종속**: Claude Code 안에서만 작동. Claude.ai, 팀원, 다른 AI와 컨텍스트 공유 불가.
+- **신뢰성 문제**: [세션 복원 버그](https://github.com/anthropics/claude-code/issues/22107)로 컨텍스트가 조용히 사라질 수 있습니다.
+
+**Handoff는 `--continue`를 보완합니다:**
+
+| 상황 | 최적 도구 |
+|------|-----------|
+| 짧은 휴식 (30분 이내) | `claude --continue` |
+| 긴 휴식 (2시간+) | `/handoff` → Cmd+V |
+| 기기 전환 | `/handoff` → Cmd+V |
+| 팀원에게 컨텍스트 공유 | `/handoff` |
+| 컨텍스트 70%+ 도달 | `/handoff` |
 
 ---
 
@@ -65,16 +89,16 @@
 
 | 기능 | 설명 |
 |------|------|
-| 🎯 **포괄적 컨텍스트** | 프로젝트 상태, 결정사항, 진행상황 자동 기록 |
-| 📋 **클립보드 자동 복사** | 한 줄의 명령으로 압축된 프롬프트가 클립보드에 복사 |
+| 🧠 **실패 접근 추적** | 무엇이 작동하지 않았고 왜인지 — 같은 실수 반복 방지 |
+| 🗜️ **500배 압축** | 200K 토큰 세션을 100-500 토큰으로 증류 |
+| 📋 **클립보드 자동 복사** | 한 줄의 명령으로 Cmd+V 붙여넣기 준비 완료 |
+| 🌐 **크로스 플랫폼** | Claude Code, Claude.ai, 다른 AI, 팀원 누구에게든 전달 |
+| 🎯 **의사결정 근거** | 왜 그 선택을 했는지, 무엇을 거부했는지 기록 |
+| 🔐 **시크릿 검출** | API 키, 자격증명 자동 감지 및 마스킹 |
+| 📊 **동적 작업 크기** | 대형 작업일수록 더 일찍 핸드오프 권장 |
 | 🔗 **Git 통합** | 커밋 히스토리, 브랜치, 스테이지된 변경사항 포함 |
-| 🚫 **실패한 접근법** | 작동하지 않은 것을 문서화하여 반복 방지 |
-| ⛓️ **Handoff 체인** | 이전/다음 세션을 연결하여 연속성 유지 |
-| 🔐 **시크릿 검출** | API 키, 자격증명 등 잠재적 보안 위험 경고 |
 | ⭐ **품질 점수** | Handoff 완성도를 0-100 점수로 검증 |
 | 🇰🇷 **한국어 지원** | 한국어 라벨과 컨텍스트를 포함한 클립보드 프롬프트 |
-| ✅ **TODO 통합** | .claude/tasks.json의 작업 자동 포함 |
-| 🔔 **자동 핸드오프 훅** | 컨텍스트 70% 도달 시 `/handoff` 권유 (선택) |
 
 ---
 
@@ -84,7 +108,7 @@
 
 ```bash
 curl -o ~/.claude/commands/handoff.md \
-  https://raw.githubusercontent.com/quantsquirrel/claude-handoff/main/SKILL.md
+  https://raw.githubusercontent.com/quantsquirrel/claude-handoff-baton/main/SKILL.md
 ```
 
 **끝.** 이제 `/handoff`를 사용할 수 있습니다.
@@ -94,7 +118,7 @@ curl -o ~/.claude/commands/handoff.md \
 컨텍스트 70% 도달 시 자동 알림을 원하면:
 
 ```bash
-/plugin marketplace add quantsquirrel/claude-handoff
+/plugin marketplace add quantsquirrel/claude-handoff-baton
 /plugin install handoff@quantsquirrel
 ```
 
@@ -315,7 +339,7 @@ which xclip || sudo apt-get install xclip
 ### 개발 설정
 
 ```bash
-git clone https://github.com/quantsquirrel/claude-handoff.git
+git clone https://github.com/quantsquirrel/claude-handoff-baton.git
 cd handoff
 npm install
 npm run dev
@@ -323,7 +347,7 @@ npm run dev
 
 ### 이슈 제출
 
-[GitHub Issues에서 제출하기](https://github.com/quantsquirrel/claude-handoff/issues)
+[GitHub Issues에서 제출하기](https://github.com/quantsquirrel/claude-handoff-baton/issues)
 
 ---
 
@@ -344,15 +368,15 @@ Copyright © 2026 Handoff Contributors
 - 예시: [examples](./examples) 디렉토리 참조
 
 **커뮤니티**
-- 이슈: [GitHub Issues](https://github.com/quantsquirrel/claude-handoff/issues)
-- 토론: [GitHub Discussions](https://github.com/quantsquirrel/claude-handoff/discussions)
+- 이슈: [GitHub Issues](https://github.com/quantsquirrel/claude-handoff-baton/issues)
+- 토론: [GitHub Discussions](https://github.com/quantsquirrel/claude-handoff-baton/discussions)
 
 ---
 
-**🏃 바톤을 전달할 준비가 되셨나요?** `/handoff`를 실행하고 모멘텀을 유지하세요!
+**🏃 바톤을 넘길 준비가 되셨나요?** `/handoff` — 원시 기록이 아닌 증류된 지식을 전달하세요.
 
-Made by [QuantSquirrel](https://github.com/quantsquirrel) | [이슈 제출](https://github.com/quantsquirrel/claude-handoff/issues)
+Made by [QuantSquirrel](https://github.com/quantsquirrel) | [이슈 제출](https://github.com/quantsquirrel/claude-handoff-baton/issues)
 
-⭐ **GitHub에서 스타를 눌러주세요:** [claude-handoff](https://github.com/quantsquirrel/claude-handoff)
+⭐ **GitHub에서 스타를 눌러주세요:** [claude-handoff-baton](https://github.com/quantsquirrel/claude-handoff-baton)
 
 <div align="right"><a href="#top">⬆️ 맨 위로</a></div>

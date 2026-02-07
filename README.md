@@ -2,16 +2,16 @@
 
 <div align="center">
 
-<img src="assets/handoff.jpeg" alt="Handoff - Pass the baton between sessions">
+<img src="assets/handoff.jpeg" alt="Handoff Baton - Don't pass raw history, pass a baton">
 
-**Pass the baton. Keep the momentum. Never explain your codebase twice.**
+**Don't pass raw history. Pass a baton — distilled, structured, ready to run.**
 
 **English** | **[한국어](README-ko.md)**
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-success?style=flat-square)](https://github.com/anthropics/claude-code)
-[![Version](https://img.shields.io/badge/version-2.1.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-handoff)
-[![Task Size Detection](https://img.shields.io/badge/Task%20Size-Dynamic-orange?style=flat-square)](https://github.com/quantsquirrel/claude-handoff)
+[![Version](https://img.shields.io/badge/version-2.1.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-handoff-baton)
+[![Task Size Detection](https://img.shields.io/badge/Task%20Size-Dynamic-orange?style=flat-square)](https://github.com/quantsquirrel/claude-handoff-baton)
 
 </div>
 
@@ -23,7 +23,7 @@
 
 ```bash
 curl -o ~/.claude/commands/handoff.md \
-  https://raw.githubusercontent.com/quantsquirrel/claude-handoff/main/SKILL.md
+  https://raw.githubusercontent.com/quantsquirrel/claude-handoff-baton/main/SKILL.md
 ```
 
 **Done.** Now you can use `/handoff`.
@@ -33,7 +33,7 @@ curl -o ~/.claude/commands/handoff.md \
 For auto-notifications when context reaches 70%:
 
 ```bash
-/plugin marketplace add quantsquirrel/claude-handoff
+/plugin marketplace add quantsquirrel/claude-handoff-baton
 /plugin install handoff@quantsquirrel
 ```
 
@@ -64,15 +64,40 @@ Re-run the curl command from Quick Start to download the latest version.
 
 ---
 
-## What is Handoff?
+## What is Handoff Baton?
 
-| Without Handoff | With Handoff |
-|-----------------|--------------|
-| ❌ Re-explain context every session | ✅ Auto-captured context |
-| ❌ Lost progress after autocompact | ✅ Clipboard restore |
-| ❌ Manual note-taking | ✅ One-command generation |
+**`--continue` restores conversations. Handoff passes a baton — distilled, structured, ready to run.**
 
-**One command. Complete context. Zero re-explaining.**
+| `--continue` (Raw History) | Handoff Baton (Distilled Knowledge) |
+|---------------------------|-------------------------------|
+| Loads entire message history (100K+ tokens) | Extracts essence in 100-500 tokens |
+| Replays tool calls, file reads, errors | Captures decisions, failures, and next steps |
+| Same session, same machine only | Clipboard: any session, any device, any AI |
+| Doesn't highlight what failed | Explicitly tracks failed approaches |
+| No prioritization of information | Tiered levels (L1/L2/L3) for your needs |
+
+**One command. One baton. 500x compression.**
+
+---
+
+## Why Not Just `--continue`?
+
+`claude --continue` is great for short breaks. But it has limits:
+
+- **Token bloat**: Restores *everything* — tool outputs, file contents, dead ends. Your 200K context fills fast.
+- **No knowledge extraction**: Raw history doesn't highlight what matters. Failed approaches hide in noise.
+- **Single-tool lock-in**: Only works within Claude Code. Can't share context with Claude.ai, teammates, or other AIs.
+- **Reliability**: [Session resume bugs](https://github.com/anthropics/claude-code/issues/22107) can lose context silently.
+
+**Handoff complements `--continue`:**
+
+| Situation | Best Tool |
+|-----------|-----------|
+| Short break (< 30 min) | `claude --continue` |
+| Long break (2+ hours) | `/handoff` → Cmd+V |
+| Switching devices | `/handoff` → Cmd+V |
+| Sharing context with team | `/handoff` |
+| Context at 70%+ | `/handoff` |
 
 ---
 
@@ -144,8 +169,8 @@ Session 1 → /handoff → Cmd+V → Session 2
 
 - Session summary
 - Completed / Pending tasks
-- Key decisions with rationale
 - Failed approaches (don't repeat!)
+- Key decisions with rationale
 - Modified files
 - Next step
 
@@ -261,7 +286,7 @@ Wait for user instructions.
 
 ```bash
 # Clone for hook files
-git clone https://github.com/quantsquirrel/claude-handoff.git ~/.claude/skills/handoff
+git clone https://github.com/quantsquirrel/claude-handoff-baton.git ~/.claude/skills/handoff
 
 # Install both hooks
 cd ~/.claude/skills/handoff && bash hooks/install.sh
@@ -281,7 +306,7 @@ The installer will register:
 ## Project Structure
 
 ```
-claude-handoff/
+claude-handoff-baton/
 ├── SKILL.md                    # The skill (copy to ~/.claude/commands/)
 ├── README.md
 ├── hooks/
@@ -310,10 +335,10 @@ claude-handoff/
 
 ## Contributing
 
-Issues and PRs welcome at [GitHub](https://github.com/quantsquirrel/claude-handoff).
+Issues and PRs welcome at [GitHub](https://github.com/quantsquirrel/claude-handoff-baton).
 
 ---
 
-**🏃 Ready to pass the baton?** Run `/handoff` and keep the momentum going!
+**🏃 Ready to pass the baton?** Run `/handoff` — don't pass raw history, pass distilled knowledge.
 
 <div align="right"><a href="#top">⬆️ Back to Top</a></div>

@@ -194,7 +194,7 @@ PASSWORD=secret     → PASSWORD=***REDACTED***
 
 ```bash
 curl -o ~/.claude/commands/handoff.md \
-  https://raw.githubusercontent.com/quantsquirrel/claude-handoff/main/SKILL.md
+  https://raw.githubusercontent.com/quantsquirrel/claude-handoff-baton/main/SKILL.md
 ```
 
 ## Notes

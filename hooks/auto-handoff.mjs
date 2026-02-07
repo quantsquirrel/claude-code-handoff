@@ -23,6 +23,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { tmpdir, homedir } from 'os';
+import { execSync } from 'node:child_process';
 
 import {
   HANDOFF_THRESHOLD,
@@ -274,7 +275,6 @@ function checkRecentHandoff() {
  */
 function getGitInfo() {
   try {
-    const { execSync } = require('child_process');
     const branch = execSync('git rev-parse --abbrev-ref HEAD 2>/dev/null', {
       encoding: 'utf8',
       cwd: process.cwd(),
