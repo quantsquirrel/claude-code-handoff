@@ -1,7 +1,7 @@
 {
   "name": "handoff",
-  "version": "2.1.0",
-  "description": "Session context handoff with hierarchical summary levels (L1/L2/L3)",
+  "version": "2.2.0",
+  "description": "Session context handoff with smart auto-scaling output",
   "author": {
     "name": "quantsquirrel"
   },
