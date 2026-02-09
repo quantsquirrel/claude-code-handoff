@@ -105,7 +105,7 @@ fi
 
 # Check 3: Required sections present (+20)
 echo -n "Checking required sections... "
-REQUIRED_SECTIONS=("Summary" "Completed" "Pending" "Next Steps")
+REQUIRED_SECTIONS=("Summary" "Completed" "Pending" "Next Step")
 MISSING_SECTIONS=()
 
 for section in "${REQUIRED_SECTIONS[@]}"; do
@@ -166,7 +166,7 @@ fi
 
 # Check 5: Next Steps has at least 2 items (+20)
 echo -n "Checking Next Steps... "
-NEXT_STEPS_COUNT=$(sed -n '/^##[^#].*Next Steps/,/^##[^#]/p' "$HANDOFF_FILE" | grep -c '^[[:space:]]*[-*+][[:space:]]' || true)
+NEXT_STEPS_COUNT=$(sed -n '/^##[^#].*Next Step/,/^##[^#]/p' "$HANDOFF_FILE" | grep -c '^[[:space:]]*[-*+][[:space:]]' || true)
 
 if [[ $NEXT_STEPS_COUNT -lt 2 ]]; then
     echo -e "${RED}FAIL${NC}"

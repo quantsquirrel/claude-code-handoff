@@ -10,7 +10,7 @@
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-success?style=flat-square)](https://github.com/anthropics/claude-code)
-[![Version](https://img.shields.io/badge/version-2.2.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-handoff-baton)
+[![Version](https://img.shields.io/badge/version-2.3.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-handoff-baton)
 [![Task Size Detection](https://img.shields.io/badge/Task%20Size-Dynamic-orange?style=flat-square)](https://github.com/quantsquirrel/claude-handoff-baton)
 
 </div>
@@ -188,6 +188,48 @@ cd ~/.claude/skills/handoff && git pull
 
 ---
 
+## 컨텍스트 충실도 (v2.3)
+
+v2.3은 원본 컨텍스트를 더 충실하게 보존합니다:
+
+| 기능 | 설명 |
+|------|------|
+| **Phase 0 검증** | 의미 있는 작업이 없는 세션에서는 핸드오프 생략 |
+| **사용자 요청** | 원본 사용자 요청을 그대로 캡처 (10개+ 메시지) |
+| **제약 조건** | 사용자가 명시한 제약 조건을 원문 그대로 기록 (50개+ 메시지) |
+| **관점 가이드** | 완료 작업은 1인칭, 미완료 작업은 객관적 서술 |
+
+### Phase 0: 빈 세션 검사
+
+핸드오프 생성 전, 다음 중 하나 이상이 참인지 검증합니다:
+- 도구가 사용되었거나
+- 파일이 수정되었거나
+- 실질적인 사용자 메시지가 존재하거나
+
+해당 사항 없음: `"No significant work in this session. Handoff skipped."`
+
+### 사용자 요청 섹션
+
+원본 사용자 요청을 의역 없이 그대로 캡처합니다:
+
+```markdown
+## User Requests
+- "JWT 인증 시스템을 구현해줘. refresh token rotation이랑 RBAC 포함해서."
+- "bcrypt는 async로 해줘, 동기는 너무 느려."
+```
+
+### 제약 조건 섹션
+
+사용자가 명시한 제약 조건을 원문 그대로 보존합니다 (전체 상세 세션만):
+
+```markdown
+## Constraints
+- "bcrypt는 async로 해줘, 동기는 너무 느려."
+- "토큰은 httpOnly 쿠키에 저장해. localStorage는 보안 문제 있으니까."
+```
+
+---
+
 ## 실행 결과
 
 `/handoff` 실행 후:
@@ -218,10 +260,12 @@ cd ~/.claude/skills/handoff && git pull
 세션 복잡도에 맞게 핵심 정보를 캡처합니다:
 
 - **요약** — 1-3문장으로 무엇이 일어났는지
+- **사용자 요청** — 원본 요청을 그대로 기록 (v2.3)
 - **완료/미완료 작업** — 진행 상황 추적
 - **실패한 접근법** — 같은 실수 반복 방지
 - **주요 결정** — 왜 그 선택을 했는지
 - **수정 파일** — 무엇이 변경되었는지
+- **제약 조건** — 사용자가 명시한 제약 조건 원문 (v2.3)
 - **다음 단계** — 구체적인 다음 액션
 
 내용이 없는 섹션은 자동으로 생략됩니다.

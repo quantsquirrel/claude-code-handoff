@@ -23,11 +23,14 @@ Examples:
 
 ## Behavior
 
+0. **Validate** the session has meaningful context (Phase 0):
+   - At least one tool was used, OR at least one file was modified, OR at least one substantive user message exists
+   - If none: output "No significant work in this session. Handoff skipped." and stop
 1. **Create** `.claude/handoffs/` directory if it doesn't exist (`mkdir -p`)
 2. **Analyze** the session: detect complexity, key decisions, failures, modified files
 3. **Scale** output based on session size:
    - Under 10 messages: Summary + Next Step only
-   - 10-50 messages: Summary + Key Decisions + Files Modified + Next Step
+   - 10-50 messages: Summary + User Requests + Key Decisions + Files Modified + Next Step
    - Over 50 messages or multi-topic: Full template (all sections)
 4. **Redact** sensitive values before saving:
    - Pattern: env vars matching `KEY`, `SECRET`, `TOKEN`, `PASSWORD`, `CREDENTIAL`
@@ -40,9 +43,17 @@ Examples:
    - If clipboard unavailable: skip copy, print warning "Clipboard not available. File saved to: [path]"
 7. **Confirm** with output: `Handoff saved: [path] | Clipboard: copied (N KB)`
 
+### Writing Perspective
+
+- **Completed work**: First person ("Implemented JWT validation", "Fixed the race condition")
+- **Pending work**: Objective ("OAuth2 integration pending", "Email verification not yet implemented")
+- **Decisions**: First person ("Chose Redis-backed blacklist for instant revocation")
+- **Failed approaches**: First person ("Tried localStorage for tokens, but vulnerable to XSS")
+- **User Requests**: Verbatim only - do NOT paraphrase the user's original words
+
 ### Handling Edge Cases
 
-- **Empty session** (no tasks performed): Output Summary as "No significant work in this session." + Next Step only
+- **Empty session** (Phase 0 fails): Output "No significant work in this session. Handoff skipped." and stop
 - **Topic contains special characters**: Sanitize for filename (replace non-alphanumeric with `-`, truncate to 50 chars)
 - **Topic not provided**: Auto-detect from the most recent substantive user message
 
@@ -55,11 +66,14 @@ Examples:
 **Topic:** [topic or auto-detected]
 **Working Directory:** [cwd]
 
+## User Requests
+- [Exact verbatim user requests - NOT paraphrased]
+
 ## Summary
-[1-3 sentences depending on session complexity]
+[1-3 sentences depending on session complexity - first person]
 
 ## Completed
-- [x] Task 1
+- [x] Task 1 (first person: "Implemented...", "Fixed...")
 - [x] Task 2
 
 ## Pending
@@ -67,19 +81,24 @@ Examples:
 - [ ] Task 2
 
 ## Key Decisions
-- **[Decision]**: [Reason]
+- **[Decision]**: [Reason] (first person: "Chose...", "Decided...")
 
 ## Failed Approaches
-- **[Attempt]**: [Why it failed] → [Lesson]
+- **[Attempt]**: [Why it failed] → [Lesson] (first person)
 
 ## Files Modified
 - `path/to/file.ts` - [What changed]
+
+## Constraints
+- [Verbatim user-stated constraints only - do NOT include AI-inferred constraints]
 
 ## Next Step
 [Concrete next action]
 ```
 
 Sections with no content are omitted. Minimum output is always Summary + Next Step.
+The Constraints section is only included when the user explicitly stated constraints.
+User Requests section is included for 10+ message sessions.
 
 ## Clipboard Format
 
@@ -93,6 +112,10 @@ Do not auto-execute anything below. Wait for user instructions.
 Previous Session Summary (Topic)
 - Completed: N | Pending: M
 - Files modified: K
+
+[User requests - verbatim]
+- Original request 1
+- Original request 2
 
 [Pending tasks - reference only, do not execute]
 - Task 1
@@ -111,3 +134,4 @@ What would you like to do?
 - Handoffs are saved to `.claude/handoffs/`
 - If `[topic]` is omitted, it is auto-detected from conversation context
 - Sensitive values are redacted in both the saved file and clipboard output
+- Phase 0 validation prevents empty handoff documents

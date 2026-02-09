@@ -1,20 +1,28 @@
 # Session Handoff Document
 
-**Project:** JWT User Authentication System  
-**Session ID:** sess-auth-001  
-**Date:** 2026-01-31  
-**Duration:** 4.5 hours  
-**Lead Agent:** executor (Sonnet)  
+**Project:** JWT User Authentication System
+**Session ID:** sess-auth-001
+**Date:** 2026-01-31
+**Duration:** 4.5 hours
+**Lead Agent:** executor (Sonnet)
 
 ---
 
-## 1. Session Summary
+## 1. User Requests
 
-This session successfully implemented a production-ready JWT authentication system with refresh token rotation, token blacklisting, and role-based access control. The backend server now supports user registration, login, token refresh, and logout flows with comprehensive validation and error handling. All core authentication features are complete and tested with 94% code coverage.
+- "JWT 인증 시스템을 구현해줘. refresh token rotation이랑 RBAC 포함해서."
+- "bcrypt는 async로 해줘, 동기는 너무 느려."
+- "토큰은 httpOnly 쿠키에 저장해. localStorage는 보안 문제 있으니까."
 
 ---
 
-## 2. Completed ✅
+## 2. Session Summary
+
+Implemented a production-ready JWT authentication system with refresh token rotation, token blacklisting, and role-based access control. The backend server now supports user registration, login, token refresh, and logout flows with comprehensive validation and error handling. All core authentication features are complete and tested with 94% code coverage.
+
+---
+
+## 3. Completed ✅
 
 - [x] **JWT Token Generation & Verification**
   - Implemented HS256 signing algorithm with configurable expiration
@@ -38,7 +46,7 @@ This session successfully implemented a production-ready JWT authentication syst
 
 ---
 
-## 3. Pending ⏳
+## 4. Pending ⏳
 
 - [ ] **OAuth2 Social Login Integration**
   - Google and GitHub OAuth2 providers not yet implemented
@@ -56,12 +64,12 @@ This session successfully implemented a production-ready JWT authentication syst
 
 ---
 
-## 4. Key Decisions
+## 5. Key Decisions
 
 ### Decision 1: HTTP-Only Cookies for Refresh Tokens
 **Rationale:** While access tokens are in memory (vulnerable to XSS but not CSRF), refresh tokens are stored in HTTP-only cookies. This balances security against both XSS and CSRF attacks. Trade-off: Requires CORS configuration.
 
-**Impact:** 
+**Impact:**
 - Server-side cookie handling reduces frontend token management complexity
 - Requires SameSite cookie policy configuration
 - More secure than localStorage for sensitive tokens
@@ -89,12 +97,12 @@ This session successfully implemented a production-ready JWT authentication syst
 
 ---
 
-## 5. Known Issues
+## 6. Known Issues
 
 ### Issue 1: Race Condition in Token Refresh
 **Description:** During concurrent refresh requests with same token, both might succeed briefly before blacklisting.
 
-**Workaround:** 
+**Workaround:**
 ```javascript
 // Implemented idempotency key in refresh endpoint
 const refreshToken = req.cookies.refreshToken;
@@ -122,11 +130,11 @@ await redis.setex(`blacklist:${token}`, blacklistTTL, true);
 
 ---
 
-## 6. Files Modified
+## 7. Files Modified
 
 ### `/src/middleware/auth.middleware.ts`
-**Status:** ✅ Complete  
-**Changes:** 
+**Status:** ✅ Complete
+**Changes:**
 - Created JWT verification middleware with error handling
 - Added role extraction from token claims
 - Implements token expiration validation with proper HTTP 401 responses
@@ -137,7 +145,7 @@ await redis.setex(`blacklist:${token}`, blacklistTTL, true);
 ---
 
 ### `/src/services/auth.service.ts`
-**Status:** ✅ Complete  
+**Status:** ✅ Complete
 **Changes:**
 - Implemented comprehensive auth service with 8 public methods
 - `generateTokenPair()`: Creates access + refresh tokens with automatic rotation
@@ -150,7 +158,7 @@ await redis.setex(`blacklist:${token}`, blacklistTTL, true);
 ---
 
 ### `/src/routes/auth.routes.ts`
-**Status:** ✅ Complete  
+**Status:** ✅ Complete
 **Changes:**
 - Created REST endpoints: POST /auth/register, /auth/login, /auth/refresh, /auth/logout
 - Rate limiting middleware on registration and login
@@ -163,7 +171,7 @@ await redis.setex(`blacklist:${token}`, blacklistTTL, true);
 ---
 
 ### `/src/database/models/user.model.ts`
-**Status:** ✅ Updated  
+**Status:** ✅ Updated
 **Changes:**
 - Added `role` enum field with values: ['user', 'moderator', 'admin']
 - Added `createdAt`, `updatedAt` timestamps
@@ -174,7 +182,7 @@ await redis.setex(`blacklist:${token}`, blacklistTTL, true);
 
 ---
 
-## 7. Failed Approaches
+## 8. Failed Approaches
 
 ### Approach 1: Storing All Tokens in JWT Claims
 **What We Tried:** Encoding token version and rotation count directly in JWT payload to avoid Redis lookups.
@@ -209,11 +217,18 @@ const hash = bcrypt.hashSync(password, 12);
 
 ---
 
-## 8. Handoff Chain
+## 9. Constraints
 
-**Current Session:** sess-auth-001 (this document)  
-**Previous Session:** sess-auth-init (Session #1 - Project setup, user model, database)  
-**Chain Length:** 2 sessions  
+- "bcrypt는 async로 해줘, 동기는 너무 느려."
+- "토큰은 httpOnly 쿠키에 저장해. localStorage는 보안 문제 있으니까."
+
+---
+
+## 10. Handoff Chain
+
+**Current Session:** sess-auth-001 (this document)
+**Previous Session:** sess-auth-init (Session #1 - Project setup, user model, database)
+**Chain Length:** 2 sessions
 
 **Context from Previous Sessions:**
 - Project initialized with Express + TypeScript + PostgreSQL
@@ -227,7 +242,7 @@ const hash = bcrypt.hashSync(password, 12);
 
 ---
 
-## 9. Next Steps (Prioritized)
+## 11. Next Steps (Prioritized)
 
 ### 1. **IMMEDIATE (Next 30 mins)** 🔥
    - [ ] Deploy authentication service to staging environment
@@ -249,7 +264,7 @@ const hash = bcrypt.hashSync(password, 12);
 
 ---
 
-## 10. How to Resume
+## 12. How to Resume
 
 ### Quick Start (5 minutes)
 ```bash
@@ -346,7 +361,7 @@ Since OAuth2 is the top pending item, here's the setup:
 
 ---
 
-## 11. Quality Score
+## 13. Quality Score
 
 ### Overall Session Quality: **87/100** ✨
 
@@ -443,8 +458,8 @@ User Login Request
 
 ---
 
-**Document Created By:** Claude Code / executor agent  
-**Last Updated:** 2026-01-31T15:30:00Z  
+**Document Created By:** Claude Code / executor agent
+**Last Updated:** 2026-01-31T15:30:00Z
 **Next Review Date:** 2026-02-07 (after OAuth2 implementation)
 
 This handoff document is complete and ready for the next session.

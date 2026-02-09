@@ -10,7 +10,7 @@
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-success?style=flat-square)](https://github.com/anthropics/claude-code)
-[![Version](https://img.shields.io/badge/version-2.2.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-handoff-baton)
+[![Version](https://img.shields.io/badge/version-2.3.0-blue?style=flat-square)](https://github.com/quantsquirrel/claude-handoff-baton)
 [![Task Size Detection](https://img.shields.io/badge/Task%20Size-Dynamic-orange?style=flat-square)](https://github.com/quantsquirrel/claude-handoff-baton)
 
 </div>
@@ -142,6 +142,48 @@ No manual level selection needed. Just run `/handoff`.
 
 ---
 
+## Context Fidelity (v2.3)
+
+v2.3 preserves the original context more faithfully:
+
+| Feature | Description |
+|---------|-------------|
+| **Phase 0 Validation** | Skips handoff when the session has no meaningful work |
+| **User Requests** | Captures original user requests verbatim (10+ messages) |
+| **Constraints** | Records user-stated constraints as-is (50+ messages) |
+| **Perspective Guide** | Completed work in first person, pending work in objective voice |
+
+### Phase 0: Empty Session Check
+
+Before creating a handoff, the skill validates that at least one of these is true:
+- A tool was used
+- A file was modified
+- A substantive user message exists
+
+If none: `"No significant work in this session. Handoff skipped."`
+
+### User Requests Section
+
+Original user requests are captured verbatim — not paraphrased:
+
+```markdown
+## User Requests
+- "JWT auth with refresh token rotation and RBAC"
+- "Use async bcrypt, sync is too slow"
+```
+
+### Constraints Section
+
+User-stated constraints are preserved exactly as spoken (full-detail sessions only):
+
+```markdown
+## Constraints
+- "Use async bcrypt, sync is too slow"
+- "Store tokens in httpOnly cookies, not localStorage"
+```
+
+---
+
 ## Workflow
 
 ```
@@ -161,10 +203,12 @@ Session 1 → /handoff → Cmd+V → Session 2
 Handoff captures what matters, scaled to session complexity:
 
 - **Summary** — What happened in 1-3 sentences
+- **User Requests** — Original requests verbatim (v2.3)
 - **Completed / Pending tasks** — Progress tracking
 - **Failed approaches** — Don't repeat mistakes
 - **Key decisions** — Why you chose what you chose
 - **Modified files** — What changed
+- **Constraints** — User-stated constraints as-is (v2.3)
 - **Next step** — Concrete next action
 
 Sections with no content are automatically omitted.

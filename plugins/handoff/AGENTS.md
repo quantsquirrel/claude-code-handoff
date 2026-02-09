@@ -1,101 +1,60 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-02-02 | Updated: 2026-02-02 -->
+<!-- Generated: 2026-02-02 | Updated: 2026-02-10 -->
 
 # handoff (Plugin)
 
 ## Purpose
 
-Core handoff plugin implementation for Claude Code. Provides the `/handoff` skill with smart auto-scaling output for session context preservation. This is the primary deliverable of the Handoff project.
+Core handoff plugin for Claude Code. Provides the `/handoff` skill with 3-level auto-scaling output (L1/L2/L3) for session context preservation. This is the primary deliverable of the project.
 
 ## Key Files
 
 | File | Description |
 |------|-------------|
-| `plugin.json` | Plugin metadata: name, version, author, commands path |
-| `handoff.md` | Skill definition with YAML frontmatter and usage documentation |
+| `plugin.json` | Plugin manifest: name, version (2.2.0), author, skills path (`./skills/`) |
+
+## Subdirectories
+
+| Directory | Purpose |
+|-----------|---------|
+| `skills/` | Skill definition files (see `skills/AGENTS.md`) |
 
 ## For AI Agents
 
 ### Working In This Directory
 
-- `plugin.json` defines plugin identity and entry point
-- `handoff.md` is the actual skill implementation
+- `plugin.json` defines plugin identity and points to `./skills/` for skill files
 - Changes here directly affect `/handoff` command behavior
-- Test changes by running `/handoff`
+- Version in `plugin.json` must match `../../.claude-plugin/marketplace.json`
 
-### plugin.json Structure
+### plugin.json Schema
 
 ```json
 {
   "name": "handoff",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Session context handoff with smart auto-scaling output",
   "author": { "name": "quantsquirrel" },
-  "commands": "./"
+  "repository": "https://github.com/quantsquirrel/claude-handoff-baton",
+  "license": "MIT",
+  "skills": "./skills/"
 }
 ```
 
-- `commands: "./"` means skill files are in this directory
-- Version must match `../../.claude-plugin/marketplace.json`
-
-### handoff.md Structure
-
-The skill file uses YAML frontmatter + markdown:
-
-```markdown
----
-name: handoff
-description: Session context handoff
-triggers:
-  - /handoff
----
-
-# Skill Content
-[Usage documentation and templates]
-```
-
-Files are saved to `../../.claude/handoffs/`
-
 ### Testing Requirements
 
-1. **Test handoff generation:**
-   ```bash
-   /handoff "test topic"
-   # Verify: File created, clipboard copied, smart-scaled output
-   ```
-
-2. **Test secret redaction:**
-   - Include API_KEY in context
-   - Verify it's replaced with `***REDACTED***`
-
-3. **Test clipboard format:**
-   - Paste clipboard content
-   - Verify proper markdown formatting
-
-### Common Patterns
-
-#### Updating Templates
-
-Templates are defined in `handoff.md` as markdown code blocks. To update:
-
-1. Find the relevant template section
-2. Modify the markdown structure
-3. Test that Claude generates correct output
-4. Update examples in documentation
-
-### Language Support
-
-- Templates: English only
-- Output documents: Generated in user's preferred language based on context
-- Documentation: Bilingual (English + Korean)
+1. Verify JSON validity: `cat plugin.json | jq .`
+2. Run `/handoff "test"` and verify file creation
+3. Test all 3 levels: `/handoff l1`, `/handoff l2`, `/handoff l3`
+4. Verify clipboard contains `<previous_session>` format
 
 ## Dependencies
 
 ### Internal
 
-- `../../SKILL.md` - Original detailed skill specification
-- `../../hooks/auto-handoff.mjs` - Auto-suggests `/handoff` at 70%+ context
-- `../../.claude/handoffs/` - Output directory for generated files
+- `../../SKILL.md` - Original skill specification
+- `../../hooks/auto-handoff.mjs` - Auto-suggests `/handoff` at context thresholds
+- `../../.claude-plugin/marketplace.json` - Version must match
 
 ### External
 
