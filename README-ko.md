@@ -19,15 +19,40 @@
 
 ## 빠른 시작
 
-```bash
-# 1. 설치
-/plugin install quantsquirrel/claude-handoff-baton
+### 옵션 1: 스킬만 (가장 간단)
 
-# 2. 사용
-/handoff
+```bash
+curl -o ~/.claude/commands/handoff.md \
+  https://raw.githubusercontent.com/quantsquirrel/claude-handoff-baton/main/SKILL.md
 ```
 
-**끝.** 다음 세션을 위해 컨텍스트가 보존됩니다.
+**끝.** `/handoff`로 수동 컨텍스트 저장/복원이 가능합니다.
+
+### 옵션 2: 전체 설치 + 훅 (권장)
+
+자동 토큰 모니터링, 컴팩션 보호, 세션 복원까지:
+
+```bash
+# 저장소 클론
+git clone https://github.com/quantsquirrel/claude-handoff-baton.git ~/.claude/skills/handoff
+
+# 4개 훅 등록
+cd ~/.claude/skills/handoff && bash hooks/install.sh
+```
+
+**끝.** 이후 모든 것이 자동으로 작동합니다.
+
+### 비교
+
+|  | 스킬만 | 전체 설치 |
+|--|:---:|:---:|
+| `/handoff` 명령어 | O | O |
+| 토큰 자동 모니터링 | - | O |
+| 임계값 핸드오프 알림 | - | O |
+| 컴팩션 전 자동 스냅샷 | - | O |
+| 세션 복원 자동 주입 | - | O |
+
+**옵션 1로 시작**하고, 자동화가 필요하면 **옵션 2로 업그레이드**하세요.
 
 ---
 
@@ -102,28 +127,7 @@
 
 ## 설치
 
-### 옵션 1: 단일 파일 (권장)
-
-```bash
-curl -o ~/.claude/commands/handoff.md \
-  https://raw.githubusercontent.com/quantsquirrel/claude-handoff-baton/main/SKILL.md
-```
-
-**끝.** 이제 `/handoff`를 사용할 수 있습니다.
-
-### 옵션 2: 전체 플러그인 (고급)
-
-컨텍스트 70% 도달 시 자동 알림을 원하면:
-
-```bash
-/plugin marketplace add quantsquirrel/claude-handoff-baton
-/plugin install handoff@quantsquirrel
-```
-
-포함 기능:
-- 70% 컨텍스트 도달 시 자동 알림
-- 작업 크기 추정
-- `/handoff` CLI 자동완성
+자세한 설치 방법은 위의 [빠른 시작](#빠른-시작) 섹션을 참조하세요.
 
 ---
 

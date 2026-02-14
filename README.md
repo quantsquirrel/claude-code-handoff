@@ -19,28 +19,40 @@
 
 ## Quick Start
 
-### Option 1: Single File (Recommended)
+### Option 1: Skill Only (Simplest)
 
 ```bash
 curl -o ~/.claude/commands/handoff.md \
   https://raw.githubusercontent.com/quantsquirrel/claude-handoff-baton/main/SKILL.md
 ```
 
-**Done.** Now you can use `/handoff`.
+**Done.** Now you can use `/handoff` to save and resume context manually.
 
-### Option 2: Full Plugin (Advanced)
+### Option 2: Full Install with Hooks (Recommended)
 
-For auto-notifications when context reaches 70%:
+Get automatic context monitoring, compaction protection, and session restoration:
 
 ```bash
-/plugin marketplace add quantsquirrel/claude-handoff-baton
-/plugin install handoff@quantsquirrel
+# Clone the repository
+git clone https://github.com/quantsquirrel/claude-handoff-baton.git ~/.claude/skills/handoff
+
+# Register all 4 hooks
+cd ~/.claude/skills/handoff && bash hooks/install.sh
 ```
 
-This includes:
-- Auto-handoff reminder at 70% context
-- Task size estimation
-- CLI autocomplete for `/handoff`
+**Done.** Everything works automatically from here.
+
+### What You Get
+
+|  | Skill Only | Full Install |
+|--|:---:|:---:|
+| `/handoff` command | O | O |
+| Auto token monitoring | - | O |
+| Handoff reminder at threshold | - | O |
+| Auto snapshot before compaction | - | O |
+| Auto context restore on resume | - | O |
+
+Start with **Option 1**, upgrade to **Option 2** when you want automation.
 
 ---
 
